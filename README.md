@@ -1,0 +1,2 @@
+# Star_Wars_The_Bounty_Hunter-Source_code_and_Executables
+2D shooter pixel platformer game made in Unity. Game's short fictional story is based on life of Boba Fett character inspired by Star Wars Omnibus: Boba Fett by John Wagner. This game is side project made solely for demonstration, education and self-development purposes. It is not intended to generate any monetary profit. This repository does not contaion the whole project directory, only source code files and playable executables for Mac and Windows operating systems (note Windows 11 may not fully work yet).
