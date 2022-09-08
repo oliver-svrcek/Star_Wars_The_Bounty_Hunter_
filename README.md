@@ -89,9 +89,9 @@ There you can upgrade characters abilities and gear (Armor, Blaster, Jetpack, Fl
 
 You can upgrade various stats such as recharge time, usage time, damage, depletion reduction, character's health points and more... 
 
-## Admin menu
+### Admin menu
 
-Admin menu is available where you can managa players.\
+Admin menu can be used to manage players.\
 You are able to add players, delete player or view player data.
 
 ## Installation
