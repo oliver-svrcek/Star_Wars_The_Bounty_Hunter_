@@ -25,7 +25,7 @@ graphics and animations (Photoshop), music and sounds (Audacity),
 testing, debugging, and more...)
 
 Afterwards I decided to completely remake the game from the ground up.
-I reworked all game scripts, I made the code more cleaner, readable, effective 
+I reworked all of the game scripts, I made the code more cleaner, readable, effective 
 and I followed common C# conventions. I also reworked and added more 
 UI, graphics, sounds, animations, ...
 
@@ -35,7 +35,7 @@ and other things...
 
 So far I was able to rework and make playable only the first level.
 Two more levels are planned. Also character voice lines, parallax background, 
-advanced enemy logic using A* pathfinging algorithm and more things are on TO-DO list.
+advanced enemy logic using A* pathfinding algorithm and more things are on TO-DO list.
 
 ---
 
@@ -76,7 +76,7 @@ Jetpack depletes it's fuel when used. It starts to recharge automatically after 
 Use blaster to eliminate your enemies.
 Blaster shoots burst of three bullets. It heats up when being fired. 
 To use it the most effectively wait a short moment after you fire each burst to let it cool down, 
-otherwise the blaster overheats and you will not be able to use it until it cools down completely.
+otherwise the blaster might overheat and you will not be able to use it until it cools down completely.
 
 Use flamethrower in sticky situations or when you want to deal high damage to your enemies.
 Flamethrower can be used only when you are on the ground and you will not be able to move until the whole salvo is burned out.
@@ -92,7 +92,7 @@ You can upgrade various stats such as recharge time, usage time, damage, depleti
 ### Admin menu
 
 Admin menu can be used to manage players.\
-You are able to add players, delete player or view player data.
+You are able to add players, delete players or view player data.
 
 ## Installation
 
