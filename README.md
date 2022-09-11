@@ -3,10 +3,10 @@
 
 ![Image 1)](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter_/main/Screenshots_and_videos/Screenshot_1.png)
 
-This repository does not contain all of the files and directories 
+**This repository does not contain all of the files and directories 
 of the whole project.
 Only source code game scripts and playable executables for Mac and Windows
-operating systems are included (note Windows 11 may not fully work yet).
+operating systems are included (note Windows 11 may not fully work yet).**
 
 ## Introduction
 
