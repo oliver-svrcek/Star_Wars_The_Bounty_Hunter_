@@ -1,7 +1,7 @@
 
 # Star Wars: The Bounty Hunter
 
-![Image 1)](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter-Scripts_and_Executables/main/Screenshots_and_videos/Screenshot_1.png)
+![Image 1)](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter_/main/Screenshots_and_videos/Screenshot_1.png)
 
 This repository does not contain all of the files and directories 
 of the whole project.
@@ -46,12 +46,12 @@ It is not intended to generate any monetary profit.**
 
 ## Screenshots form the game
 
-![Image 2](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter-Scripts_and_Executables/main/Screenshots_and_videos/Screenshot_2.png)\
-![Image 3](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter-Scripts_and_Executables/main/Screenshots_and_videos/Screenshot_3.png)\
-![Image 4](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter-Scripts_and_Executables/main/Screenshots_and_videos/Screenshot_4.png)\
-![Image 5](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter-Scripts_and_Executables/main/Screenshots_and_videos/Screenshot_5.png)\
-![Image 6](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter-Scripts_and_Executables/main/Screenshots_and_videos/Screenshot_6.png)\
-![Image 7](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter-Scripts_and_Executables/main/Screenshots_and_videos/Screenshot_7.png)
+![Image 2](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter_/main/Screenshots_and_videos/Screenshot_2.png)\
+![Image 3](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter_/main/Screenshots_and_videos/Screenshot_3.png)\
+![Image 4](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter_/main/Screenshots_and_videos/Screenshot_4.png)\
+![Image 5](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter_/main/Screenshots_and_videos/Screenshot_5.png)\
+![Image 6](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter_/main/Screenshots_and_videos/Screenshot_6.png)\
+![Image 7](https://raw.githubusercontent.com/oliver-svrcek/Star_Wars_The_Bounty_Hunter_/main/Screenshots_and_videos/Screenshot_7.png)
 
 ## Controls
 
@@ -99,7 +99,7 @@ You are able to add players, delete players or view player data.
 To play the game download this repository.\
 No installation is reqired. Navigate to this path in directory structure:
 ```
-Star_Wars_The_Bounty_Hunter-Scripts_and_Executables/Executables/
+Star_Wars_The_Bounty_Hunter_/Executables/
 ```
 Choose the version for your operating system (MacOS / Windows 10) and launch the game directly from executable file.
 
