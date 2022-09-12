@@ -96,12 +96,8 @@ You are able to add players, delete players or view player data.
 
 ## Installation
 
-To play the game download this repository.\
-No installation is reqired. Navigate to this path in directory structure:
-```
-Star_Wars_The_Bounty_Hunter_/Executables/
-```
-Choose the version for your operating system (MacOS / Windows 10) and launch the game directly from executable file.
+To play the game go to releases and download ZIP archive for your operating system.\
+No installation is reqired, launch the game directly from executable file.
 
 ## Packages and plugins
 
