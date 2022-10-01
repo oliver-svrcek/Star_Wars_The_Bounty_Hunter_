@@ -101,11 +101,11 @@ No installation is reqired, unzip the archive and launch the game directly from 
 
 ## Packages and plugins
 
-[sqlite-unity-plugin](https://github.com/rizasif/sqlite-unity-plugin)\
-[A* Pathfinding Project for Unity](https://arongranberg.com/astar/)
+- [sqlite-unity-plugin](https://github.com/rizasif/sqlite-unity-plugin)
+- [A* Pathfinding Project for Unity](https://arongranberg.com/astar/)
 
-Manaspace font\
-Star Jedi Rounded font
+- Manaspace font
+- Star Jedi Rounded font
 
 # Author
 Created by  Oliver Svrček
