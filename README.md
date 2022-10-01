@@ -46,12 +46,12 @@ It is not intended to generate any monetary profit.**
 
 ## Screenshots form the game
 
-![Screenshot_2](https://user-images.githubusercontent.com/75705745/193413736-44fa3d22-1679-4a43-9e63-541c971355b4.png)
-![Screenshot_3](https://user-images.githubusercontent.com/75705745/193413740-20a982e6-4cb1-41e0-a505-0b08da82a17a.png)
-![Screenshot_4](https://user-images.githubusercontent.com/75705745/193413742-39d52910-f7aa-4ecf-841d-fa6ab9a93e4a.png)
-![Screenshot_5](https://user-images.githubusercontent.com/75705745/193413744-c5ee760b-a14b-4877-a9cf-27b17dff2294.png)
-![Screenshot_6](https://user-images.githubusercontent.com/75705745/193413746-815cc22e-b00f-4f05-9973-5e468b595511.png)
-![Screenshot_7](https://user-images.githubusercontent.com/75705745/193413748-4981991a-3208-4cf4-a700-53310f53cdcf.png)
+![Image_2](https://user-images.githubusercontent.com/75705745/193413736-44fa3d22-1679-4a43-9e63-541c971355b4.png)
+![Image_3](https://user-images.githubusercontent.com/75705745/193413740-20a982e6-4cb1-41e0-a505-0b08da82a17a.png)
+![Image_4](https://user-images.githubusercontent.com/75705745/193413742-39d52910-f7aa-4ecf-841d-fa6ab9a93e4a.png)
+![Image_5](https://user-images.githubusercontent.com/75705745/193413744-c5ee760b-a14b-4877-a9cf-27b17dff2294.png)
+![Image_6](https://user-images.githubusercontent.com/75705745/193413746-815cc22e-b00f-4f05-9973-5e468b595511.png)
+![Image_7](https://user-images.githubusercontent.com/75705745/193413748-4981991a-3208-4cf4-a700-53310f53cdcf.png)
 
 ## Controls
 
