@@ -1,7 +1,7 @@
 
 # Star Wars: The Bounty Hunter
 
-![Image 1)](https://media.cleanshot.cloud/media/15624/dU8rSRM8CQ1ZkVAHno7zsWJ0T06rAIJypwq8cSYY.jpeg?Expires=1664591909&Signature=PiaAphPx4WzkVanTAUVDFT8Pr2pnFpxXLLg0mfw~xp6lW~6RRcQCARDzN9aL1blTos2EggD32rlTHyhYhde0aUslWAIZ0lc2-kpQR2gIOj6OxasnMk8rdz2mXVDYQAuUNkPdsosgcAX-nMyUkL5IGZzj9yhYX8Rhj6lm3OkUGDRz9IMYLOTCW8dBvAzN1qisbX5Avvf81g-HHjHlnZAuRyAnxI2a5NcohOiyFjPvP6zylm2gonrFBX7hjzunHsA8yfX3m6FC~7K06fELqlbMyLfwnCbRqKZNIpbqBiVLq7S0IquYcgv6Z88ohYBzftyIUyWaKXYvk1J9UYLut6fQRA__&Key-Pair-Id=K269JMAT9ZF4GZ)
+![Image_1](https://user-images.githubusercontent.com/75705745/193413709-b942dc3d-a322-4132-9ac9-cd86b84efc06.png)
 
 **This repository does not contain all of the files and directories 
 of the whole project.
@@ -46,12 +46,12 @@ It is not intended to generate any monetary profit.**
 
 ## Screenshots form the game
 
-![Image 2](https://media.cleanshot.cloud/media/15624/kWI9tshE9tyBUtObY1FSWaGmPoFGpU9XyHTZL9fR.jpeg?Expires=1664591898&Signature=XUlR5ChMzc6dSgxdd1wZdIVdSSOboy7Uoz3AcG3QIiUqLq7qdkGocMlLFJGZgI40kQwFzxBISOIgbrs1Tm77M6eb72t0UPmDIJ7CtPGq4xQFKAvD9TfQX05GbPwPedoZ3Kqj3rFsQXFJrX8fbB3EVDVbLsIGdz7fyo1~QvcfMKURv6IB0uJvn3YADKIGGIpzpPEGdtU~14cI~RKUA5GGkTCQgBsLH8HWqPq3JJYMrOam34YEsFeaU2pZFW35~K8IIoyxakU8JondqhUmUgg4wN3QOXnDPrw7DmSACXedy8WA~nQNa~WvVxTG2bkmeCFrkVUgjmFWiae1oJBhCSzP~g__&Key-Pair-Id=K269JMAT9ZF4GZ)\
-![Image 3](https://media.cleanshot.cloud/media/15624/ZTSWGOWnfl9xh2E1PUAoHVrPuZgGJsQRDcb4mjsH.jpeg?Expires=1664591911&Signature=WzBKQJiqQZiP8sqsOE01KMvLKiwcwAbSt-10V4Vm79cp4wKIaLx58BaJ0FBHdrXZEw5H3d4dT3uODIQPI7jSFhiPjLCO5w-mZdhccjYnvXoCspBdNtjTZQhl7pTnqB64k9xatj1seMTBw2wU~J0IBxpE1ME0KEkkbRxnEf2JJ9W63JoHYB4Whids~lzXnKTvkYzCyJWsdlbnEnTIJESOhC034httFSPdx2snyeeyp6JG0VJKlOa91EbjdUy-KPZUiDMZjF5cVhVkXVN--nnruwVhOiXo6qCpPUaONlps1MFuAxXZZbWXgggiYJHImtp~Cs2BUYxDRG0OwlWJKklypg__&Key-Pair-Id=K269JMAT9ZF4GZ)\
-![Image 4](https://media.cleanshot.cloud/media/15624/swPpi1PQNFcFXzSjXshZMbK9vTdY5rFQsHbYz8li.jpeg?Expires=1664591916&Signature=WWsn1h-OX4CnLyg-DsgocB-jyFb1OA2upaKiP6td69D5~6g~SAgG2yY6F6yDrXSVIit~~EaiV2Z30cSyK4bB1j7R8VSoXMI~mZYFvaAXRYW293VWLcuDve3pFR-MKgdFzI1Cll1VPGxHfP01C20OldBCJOXr6xXicdBJub2IAap-8VtxMz00COxoVo8Hanp0k5AifxIOV~9EOZIbmkRhTYys8sEgJZBDCfybeYkIwSgkAocWn3mqXEpJhEK4LCjPuc51tsBtIfF8WgcM4KMAooKcZels81EpfPHtIaQeX7JxES2bnqNHbc~gEe7n8Qt-VPHXqv4Vmi9GGL8IHDWHtg__&Key-Pair-Id=K269JMAT9ZF4GZ)\
-![Image 5](https://media.cleanshot.cloud/media/15624/vQeG317mrvKvxnLUmbnmjjAZPjZoEHOrLWUl7wt6.jpeg?Expires=1664591919&Signature=kOZ8eTe5gypdwXknW2VCurWJpPlUrZp5GDQF77ei49Kv4UN-9ILRQLFomBlp7QqaIUoUkAnd3-~WWklp2pp5x4Jz9WtB335GAg8cIH~MkQLTdqIZthWrHydbzlwNJMjp681LLT3qjuBJa27Wi2ldX77QxtLN04u7v~KtYkCNTdkbHUXQiSqnmDLcl9mFpAyMwxNMyKSx9pU4HG892xJbTQC6SE~Yjz2GDQm7oYDx~-RC9odi6-ISMQUyfSCiyz4eQDMMIjbdwCAiHIPXuvg2LFkch3RTi02UiFhf8AiuU6Zg21zkRMGJluVDozn7kKtEQ2mBNhM9AjfBovgN3K7RHQ__&Key-Pair-Id=K269JMAT9ZF4GZ)\
-![Image 6](https://media.cleanshot.cloud/media/15624/JOt4lIfuMEfVwIeC8gjF0MvQcM81kyFY8tbssGnw.jpeg?Expires=1664591917&Signature=lGUYrQkr5dDcETuTDA8WRVo5dxhCLcqG1jpq6GcjN-8pBDzmTOTaP9tS8IT7Qmw5sr1XdoRM~UzCbrcPmgO6QD-GiJGkcO-JE5GbS4ZsuJxOYUoeob-ohjyBmDMS6i~cyXZuzK0Z0R0nDppHFhZR4sbdpUJsSjfni80f5v0J1qvkzsffFPdD8jdEQZhkYFpcvbGex5HlfzeZgHwxwpVrvciM7iIT4JgqZ2aHS3-JgOiUz2GoBU~Er~YaooU7hRVDcRdRA4j4eb1a1K0xY6VKt0ydPJOfvzj65Hpchwkn~t-zp6E~Ocu7dCxGE65~fSXfggIIqLiS5kTMDxUt~WwiQg__&Key-Pair-Id=K269JMAT9ZF4GZ)\
-![Image 7](https://media.cleanshot.cloud/media/15624/Xn7FgA0udcUj1knWek2nHL270RWTXc3VAGidzEN4.jpeg?Expires=1664591921&Signature=Vz-kRII~f~i0WrC4nt6tBCfJGmA9OcRKEV60-zHSPYZbT6ffFr7BWorcIjiZHYX0cZeteWZfykWsvxBhHzEJGLwdUkgTQa6MgTlki72V~26RTp250GOm8Szm58y0ynuFhbiJIJRhueVMKmwq83E4lnBZCOHtaS5SBflCadNMoBeKc0IwFeuZIvr36QGHjS7ssmh26NdUF37QB2OSh3SD3X2jDnZOqsq8R07I~umJkjIdL4-HtUGtkjVrkv-AkzscOfiJwUpFOjal2pImT64SqI8NYvPqFAZEXTOAelPzfiEW8KEEz4iDeqarD5JdLqDDLi6XlcTdcdCFltoQswXlIA__&Key-Pair-Id=K269JMAT9ZF4GZ)
+![Screenshot_2](https://user-images.githubusercontent.com/75705745/193413736-44fa3d22-1679-4a43-9e63-541c971355b4.png)
+![Screenshot_3](https://user-images.githubusercontent.com/75705745/193413740-20a982e6-4cb1-41e0-a505-0b08da82a17a.png)
+![Screenshot_4](https://user-images.githubusercontent.com/75705745/193413742-39d52910-f7aa-4ecf-841d-fa6ab9a93e4a.png)
+![Screenshot_5](https://user-images.githubusercontent.com/75705745/193413744-c5ee760b-a14b-4877-a9cf-27b17dff2294.png)
+![Screenshot_6](https://user-images.githubusercontent.com/75705745/193413746-815cc22e-b00f-4f05-9973-5e468b595511.png)
+![Screenshot_7](https://user-images.githubusercontent.com/75705745/193413748-4981991a-3208-4cf4-a700-53310f53cdcf.png)
 
 ## Controls
 
