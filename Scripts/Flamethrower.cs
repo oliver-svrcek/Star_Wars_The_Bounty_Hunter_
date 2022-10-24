@@ -191,8 +191,9 @@ public class Flamethrower : MonoBehaviour
     {
         Animator.SetBool("IsUsingFlamethrower", true);
         
-        PlayerWeapons.CanUseWeapons = false;
-        PlayerMovement.CanMove = false;
+        PlayerMovement.SetFreeze(true);
+        PlayerMovement.enabled = false;
+        PlayerWeapons.enabled = false;
         ParticleSystem.Play();
         BoxCollider2D.enabled = true;
         Coroutine increaseRangeCoroutine = StartCoroutine(IncreaseRange());
@@ -223,8 +224,9 @@ public class Flamethrower : MonoBehaviour
         BoxCollider2D.enabled = false;
         EnemiesInRange = new List<Enemy>();
         CoolingCoroutine = StartCoroutine(Cooling());
-        PlayerMovement.CanMove = true;
-        PlayerWeapons.CanUseWeapons = true;
+        PlayerWeapons.enabled = true;
+        PlayerMovement.enabled = true;
+        PlayerMovement.SetFreeze(false);
         FlameCoroutine = null;
     }
     

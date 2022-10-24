@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerLoginMenuManagement : MonoBehaviour
 {
     private AudioManagement AudioManagement { get; set; }
-    private TextMeshProUGUI PlayerNameInputField { get; set; }
+    private TMP_InputField PlayerNameInputField { get; set; }
     private GameObject PrimaryMenuGameObject { get; set; }
     private GameObject PlayerMainMenuGameObject { get; set; }
     private GameObject UserTypeMenuGameObject { get; set; }
@@ -34,26 +34,23 @@ public class PlayerLoginMenuManagement : MonoBehaviour
         }
         
         if (GameObject.Find(
-                "Interface/MainCamera/UICanvas/UserTypeMenu/PlayerLoginMenu/PrimaryMenu/PlayerNameInputField/" +
-                "Text Area/Text"
+                "Interface/MainCamera/UICanvas/UserTypeMenu/PlayerLoginMenu/PrimaryMenu/PlayerNameInputField/"
                 ) is null)
         {
             Debug.LogError(
                 "ERROR: <PlayerLoginMenuManagement> - Interface/MainCamera/UICanvas/UserTypeMenu/" +
-                "PlayerLoginMenu/PrimaryMenu/PlayerNameInputField/Text Area/Text game object was not found in game " +
+                "PlayerLoginMenu/PrimaryMenu/PlayerNameInputField game object was not found in game " +
                 "object hierarchy."
                 );
             Application.Quit(1);
         }
         if ((PlayerNameInputField = GameObject.Find(
-                "Interface/MainCamera/UICanvas/UserTypeMenu/PlayerLoginMenu/PrimaryMenu/PlayerNameInputField/" +
-                "Text Area/Text"
-                ).GetComponent<TextMeshProUGUI>()) is null)
+                "Interface/MainCamera/UICanvas/UserTypeMenu/PlayerLoginMenu/PrimaryMenu/PlayerNameInputField"
+                ).GetComponent<TMP_InputField>()) is null)
         {
             Debug.LogError(
                 "ERROR: <PlayerLoginMenuManagement> - Interface/MainCamera/UICanvas/UserTypeMenu/" +
-                "PlayerLoginMenu/PrimaryMenu/PlayerNameInputField/Text Area/Text game object is missing " +
-                "TextMeshProUGUI component."
+                "PlayerLoginMenu/PrimaryMenu/PlayerNameInputField game object is missing TMP_InputField component."
                 );
             Application.Quit(1);
         }
@@ -143,6 +140,7 @@ public class PlayerLoginMenuManagement : MonoBehaviour
             AudioManagement.PlayOneShot("ErrorSound");
             PrimaryMenuGameObject.SetActive(false);
             PlayerNotFoundWarningGameObject.SetActive(true);
+            PlayerNameInputField.text = "";
             return;
         }
         
@@ -171,6 +169,7 @@ public class PlayerLoginMenuManagement : MonoBehaviour
             AudioManagement.PlayOneShot("ErrorSound");
             PrimaryMenuGameObject.SetActive(false);
             PlayerAlreadyExistsWaringGameObject.SetActive(true);
+            PlayerNameInputField.text = "";
             return;
         }
         
@@ -185,6 +184,7 @@ public class PlayerLoginMenuManagement : MonoBehaviour
     {
         PrimaryMenuGameObject.SetActive(false);
         PlayerMainMenuGameObject.SetActive(true);
+        PlayerNameInputField.text = "";
     }
 
     public void SwitchBackToPrimaryMenu()
@@ -201,5 +201,6 @@ public class PlayerLoginMenuManagement : MonoBehaviour
         AudioManagement.PlayOneShot("ButtonSound");
         PrimaryMenuGameObject.SetActive(false);
         UserTypeMenuGameObject.SetActive(true);
+        PlayerNameInputField.text = "";
     }
 }

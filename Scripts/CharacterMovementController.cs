@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -5,12 +6,11 @@ public class CharacterMovementController : MonoBehaviour
 {
 	private Animator Animator { get; set; }
 	private Rigidbody2D Rigidbody2D { get; set; }
-	private Transform GroundCheck  { get; set; }
+	private CapsuleCollider2D BodyCollider  { get; set; }
 	private LayerMask WhatIsGround  { get; set; }
 	private Vector3 velocity;
 	private bool AirControl  { get; set; }
 	public bool IsGrounded { get; private set; }
-	private float GroundedRadius { get; set; }
 	private float JumpForce  { get; set; }
 	private float MovementSmoothing  { get; set; }
 	private bool IsLookingRight { get; set; } = true;
@@ -23,47 +23,38 @@ public class CharacterMovementController : MonoBehaviour
 
 	private void Awake()
 	{
-		if (GameObject.Find("Player") is null)
+		if ((Animator = this.gameObject.GetComponent<Animator>()) is null)
 		{
 			Debug.LogError(
-				"ERROR: <CharacterMovementController> - Player game object was not found in the game object " +
-				"hierarchy."
+				"ERROR: <CharacterMovementController> - " + this.gameObject.name +
+				" game object is missing Animator component."
 				);
 			Application.Quit(1);
 		}
 		
-		if ((Animator = GameObject.Find("Player").GetComponent<Animator>()) is null)
+		if ((Rigidbody2D = this.gameObject.GetComponent<Rigidbody2D>()) is null)
 		{
 			Debug.LogError(
-				"ERROR: <CharacterMovementController> - Player game object is missing Animator component."
-				);
-			Application.Quit(1);
-		}
-		
-		if ((Rigidbody2D = GameObject.Find("Player").GetComponent<Rigidbody2D>()) is null)
-		{
-			Debug.LogError(
-				"ERROR: <CharacterMovementController> - Player game object is missing Rigidbody2D component."
+				"ERROR: <CharacterMovementController> - " + this.gameObject.name +
+				" game object is missing Rigidbody2D component."
 				);
 			Application.Quit(1);
 		}
 
-		if (GameObject.Find("Player/GroundCheck") is null)
+		if ((BodyCollider = this.gameObject.GetComponent<CapsuleCollider2D>()) is null)
 		{
 			Debug.LogError(
-				"ERROR: <CharacterMovementController> - Player/GroundCheck game object was not found in the " +
-				"game object hierarchy."
+				"ERROR: <CharacterMovementController> - " + this.gameObject.name +
+				" game object is missing CapsuleCollider2D component."
 				);
 			Application.Quit(1);
 		}
-		GroundCheck = GameObject.Find("Player/GroundCheck").transform;
 		
-		WhatIsGround = LayerMask.GetMask("GameWorld");
+		WhatIsGround = LayerMask.GetMask("GameWorldSolid");
 		velocity = Vector3.zero;
 
 		AirControl = true;
 		IsGrounded = false;
-		GroundedRadius = 0.2f;
 		JumpForce = 850f;
 		MovementSmoothing = 0.01f;
 		IsLookingRight = true;
@@ -79,17 +70,20 @@ public class CharacterMovementController : MonoBehaviour
 		bool wasGrounded = IsGrounded;
 		IsGrounded = false;
 
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(
-			GroundCheck.position, GroundedRadius, WhatIsGround
+		Collider2D[] colliders = Physics2D.OverlapCapsuleAll(
+			new Vector2(BodyCollider.bounds.center.x, BodyCollider.bounds.center.y - 0.1f), 
+			new Vector2(BodyCollider.size.x - 0.4f, BodyCollider.size.y), 
+			BodyCollider.direction, 0f, WhatIsGround
 			);
+
 		for (int i = 0; i < colliders.Length; i++)
 		{
 			if (colliders[i].gameObject != gameObject)
 			{
 				IsGrounded = true;
+				
 				if (!wasGrounded)
 				{
-					Animator.SetBool("IsJumping", false);
 					OnLandEvent.Invoke();
 				}
 			}
@@ -100,6 +94,8 @@ public class CharacterMovementController : MonoBehaviour
 	{
 		if (IsGrounded)
 		{
+			Animator.SetBool("IsJumping", false);
+			Animator.SetBool("IsFalling", false);
 			Animator.SetBool("IsGrounded", true);	
 		}
 		else
@@ -145,9 +141,8 @@ public class CharacterMovementController : MonoBehaviour
 
 		if (IsGrounded && jump)
 		{
-			Animator.SetBool("IsJumping", true);
-			
 			IsGrounded = false;
+			Animator.SetBool("IsJumping", true);
 			Rigidbody2D.velocity = new Vector2(Rigidbody2D.velocity.x, 0f);
 			Rigidbody2D.AddForce(new Vector2(0f, JumpForce));
 		}

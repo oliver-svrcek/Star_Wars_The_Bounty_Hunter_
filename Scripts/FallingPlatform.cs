@@ -4,6 +4,7 @@ public class FallingPlatform : MonoBehaviour
 {
     private AudioManagement AudioManagement { get; set; }
     private Rigidbody2D Rigidbody2D { get; set; }
+    private GameObject DetectionArea { get; set; }
     private GameObject Spikes { get; set; }
     
     private void Awake()
@@ -26,6 +27,16 @@ public class FallingPlatform : MonoBehaviour
             Application.Quit(1);
         }
         
+        if (this.gameObject.transform.Find("DetectionArea") is null)
+        {
+            Debug.LogError(
+                "ERROR: <FallingPlatform> - " + this.gameObject.transform.name + "/DetectionArea game object " +
+                "was not found in game object hierarchy."
+            );
+            Application.Quit(1);
+        }
+        DetectionArea = this.gameObject.transform.Find("DetectionArea").gameObject;
+        
         if (this.gameObject.transform.Find("SpikesLong") is null)
         {
             Debug.LogError(
@@ -34,7 +45,6 @@ public class FallingPlatform : MonoBehaviour
                 );
             Application.Quit(1);
         }
-
         Spikes = this.gameObject.transform.Find("SpikesLong").gameObject;
     }
     
@@ -42,6 +52,7 @@ public class FallingPlatform : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            DetectionArea.SetActive(false);
             AudioManagement.PlayOneShot("FallingPlatformSound");
             Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
             Spikes.SetActive(true);

@@ -1,13 +1,13 @@
 using System;
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AdminMenu : MonoBehaviour
 {
     private AudioManagement AudioManagement { get; set; }
-    private TextMeshProUGUI PlayerNameInputField { get; set; }
+    private TMP_InputField PlayerNameInputField { get; set; }
     private TextMeshProUGUI PlayerDataTextArea { get; set; }
     private GameObject PrimaryMenuGameObject { get; set; }
     private GameObject UserTypeMenuGameObject { get; set; }
@@ -39,24 +39,22 @@ public class AdminMenu : MonoBehaviour
         }
         
         if (GameObject.Find(
-                "Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/" +
-                "PlayerNameInputField/Text Area/Text"
+                "Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/PlayerNameInputField"
                 ) is null)
         {
             Debug.LogError(
                 "ERROR: <AdminMenu> - Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/" +
-                "PlayerNameInputField/Text Area/Text game object was not found in game object hierarchy."
+                "PlayerNameInputField game object was not found in game object hierarchy."
                 );
             Application.Quit(1);
         }
         if ((PlayerNameInputField = GameObject.Find(
-                "Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/" +
-                "PlayerNameInputField/Text Area/Text"
-                ).GetComponent<TextMeshProUGUI>()) is null)
+                "Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/PlayerNameInputField"
+                ).GetComponent<TMP_InputField>()) is null)
         {
             Debug.LogError(
                 "ERROR: <AdminMenu> - Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/" +
-                "PlayerNameInputField/Text Area/Text game object is missing TextMeshProUGUI component."
+                "PlayerNameInputField game object is missing TMP_InputField component."
                 );
             Application.Quit(1);
         }
@@ -83,10 +81,10 @@ public class AdminMenu : MonoBehaviour
                 );
             Application.Quit(1);
         }
-        
+
         if ((PrimaryMenuGameObject = GameObject.Find(
                 "Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu"
-                )) is null)
+            )) is null)
         {
             Debug.LogError(
                 "ERROR: <AdminMenu> - Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu game " +
@@ -158,32 +156,6 @@ public class AdminMenu : MonoBehaviour
         LoadAllPlayerData();
     }
 
-    public void LoadPlayerData()
-    {
-        PlayerName = PlayerNameInputField.text;
-        PlayerName = PlayerName.Replace("\u200B", "");
-
-        if (PlayerName != "" && !DatabaseManagement.EntryExists("PlayerData", PlayerName))
-        {
-            LoadAllPlayerData();
-            AudioManagement.PlayOneShot("ErrorSound");
-            PrimaryMenuGameObject.SetActive(false);
-            PlayerNotFoundWarningGameObject.SetActive(true);
-            return;
-        }
-        
-        AudioManagement.PlayOneShot("ButtonSound");
-
-        if (PlayerName == "")
-        {
-            LoadAllPlayerData();
-        }
-        else
-        {
-            LoadSinglePlayerData();
-        }
-    }
-    
     private void LoadSinglePlayerData()
     {
         PlayerDataTextArea.text = "";
@@ -198,7 +170,7 @@ public class AdminMenu : MonoBehaviour
         PrintEntryLine(entry);
     }
     
-    private void LoadAllPlayerData()
+    public void LoadAllPlayerData()
     {
         PlayerDataTextArea.text = "";
         
@@ -239,7 +211,38 @@ public class AdminMenu : MonoBehaviour
         }
     }
 
-    public void CreateNewPlayer()
+    public void SearchPlayer()
+    {
+        PlayerName = PlayerNameInputField.text;
+        PlayerName = PlayerName.Replace("\u200B", "");
+        
+        if (PlayerName != "" && !DatabaseManagement.EntryExists("PlayerData", PlayerName))
+        {
+            LoadAllPlayerData();
+            AudioManagement.PlayOneShot("ErrorSound");
+            PrimaryMenuGameObject.SetActive(false);
+            PlayerNotFoundWarningGameObject.SetActive(true);
+            PlayerNameInputField.text = "";
+            PlayerName = "";
+            return;
+        }
+        
+        AudioManagement.PlayOneShot("ButtonSound");
+        
+        if (PlayerName == "")
+        {
+            LoadAllPlayerData();
+        }
+        else
+        {
+            LoadSinglePlayerData();
+        }
+        
+        PlayerNameInputField.text = "";
+        PlayerName = "";
+    }
+    
+    public void AddPlayer()
     {
         PlayerName = PlayerNameInputField.text;
         PlayerName = PlayerName.Replace("\u200B", "");
@@ -257,6 +260,8 @@ public class AdminMenu : MonoBehaviour
             AudioManagement.PlayOneShot("ErrorSound");
             PrimaryMenuGameObject.SetActive(false);
             PlayerAlreadyExistsWaringGameObject.SetActive(true);
+            PlayerNameInputField.text = "";
+            PlayerName = "";
             return;
         }
         
@@ -264,6 +269,8 @@ public class AdminMenu : MonoBehaviour
         PlayerData playerData = new PlayerData(PlayerName);
         playerData.SaveNewData();
         LoadAllPlayerData();
+        PlayerNameInputField.text = "";
+        PlayerName = "";
     }
     
     public void DeletePlayer()
@@ -284,6 +291,8 @@ public class AdminMenu : MonoBehaviour
             AudioManagement.PlayOneShot("ErrorSound");
             PrimaryMenuGameObject.SetActive(false);
             PlayerNotFoundWarningGameObject.SetActive(true);
+            PlayerNameInputField.text = "";
+            PlayerName = "";
             return;
         }
         
@@ -298,6 +307,8 @@ public class AdminMenu : MonoBehaviour
         DatabaseManagement.DeleteEntry("PlayerData", PlayerName);
         ConfirmDeleteWarningGameObject.SetActive(false);
         PrimaryMenuGameObject.SetActive(true);
+        PlayerNameInputField.text = "";
+        PlayerName = "";
         LoadAllPlayerData();
     }
     
@@ -316,5 +327,6 @@ public class AdminMenu : MonoBehaviour
         AudioManagement.PlayOneShot("ButtonSound");
         PrimaryMenuGameObject.SetActive(false);
         UserTypeMenuGameObject.SetActive(true);
+        PlayerNameInputField.text = "";
     }
 }

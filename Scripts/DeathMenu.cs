@@ -147,6 +147,8 @@ public class DeathMenu : MonoBehaviour
         Cursor.visible = true;
         PrimaryMenuGameObject.SetActive(true);
 
+        yield return new WaitForSecondsRealtime(0.5f);
+
         yield return new WaitForSecondsRealtime(5f);
 
         GameTipGameObject.SetActive(false);

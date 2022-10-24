@@ -99,7 +99,7 @@ public class UserTypeMenuManagement : MonoBehaviour
     {
         AudioManagement.PlayOneShot("ButtonSound");
         PrimaryMenuGameObject.SetActive(false);
-        AdminMenu.LoadPlayerData();
+        AdminMenu.LoadAllPlayerData();
         AdminMenuGameObject.SetActive(true);
     }
 

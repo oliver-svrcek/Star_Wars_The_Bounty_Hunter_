@@ -5,7 +5,6 @@ public class PlayerWeapons : MonoBehaviour
     private AudioManagement AudioManagement { get; set; }
     public Blaster Blaster { get; private set; }
     public Flamethrower Flamethrower { get; private set; }
-    public bool CanUseWeapons { get; set; }
 
     private void Awake()
      {
@@ -61,35 +60,16 @@ public class PlayerWeapons : MonoBehaviour
          }
      }
 
-    private void Start()
-    {
-        CanUseWeapons = true;
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (CanUseWeapons)
-            {
-                Blaster.Activate();
-            }
-            else
-            {
-                AudioManagement.PlayOneShot("AbilityNotAvailableSound");
-            }
+            Blaster.Activate();
         }
 
         if (Input.GetKeyDown(KeyCode.V))
         {
-            if (CanUseWeapons)
-            {
-                Flamethrower.Activate();
-            }
-            else
-            {
-                AudioManagement.PlayOneShot("AbilityNotAvailableSound");
-            }
+            Flamethrower.Activate();
         }
     }
 }

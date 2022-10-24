@@ -16,7 +16,7 @@ public class Spikes : MonoBehaviour
                 );
             Application.Quit(1);
         }
-
+        
         Damage = int.MaxValue;
     }
     

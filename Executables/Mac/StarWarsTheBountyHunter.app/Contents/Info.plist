@@ -7,7 +7,7 @@
     <key>CFBundleExecutable</key>
     <string>Star Wars The Bounty Hunter</string>
     <key>CFBundleGetInfoString</key>
-    <string>Unity Player version 2022.1.0f1 (369b620af41c). (c) 2022 Unity Technologies ApS. All rights reserved.</string>
+    <string>Unity Player version 2022.1.15f1 (42973686a05c). (c) 2022 Unity Technologies ApS. All rights reserved.</string>
     <key>CFBundleIconFile</key>
     <string>PlayerIcon.icns</string>
     <key>CFBundleIdentifier</key>
@@ -40,6 +40,6 @@
     <key>NSPrincipalClass</key>
     <string>PlayerApplication</string>
     <key>UnityBuildNumber</key>
-    <string>369b620af41c</string>
+    <string>42973686a05c</string>
   </dict>
 </plist>

@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
     private PlayerMovement PlayerMovement { get; set; }
     private PlayerWeapons PlayerWeapons { get; set; }
     private SpriteRenderer SpriteRenderer { get; set; }
+    private Animator Animator { get; set; }
+    private CapsuleCollider2D BodyCollider { get; set; }
+    private Rigidbody2D Rigidbody2D { get; set; }
     private AudioManagement AudioManagement { get; set; }
     private PauseMenu PauseMenu { get; set; }
     private DeathMenu DeathMenu { get; set; }
@@ -37,6 +40,24 @@ public class Player : MonoBehaviour
         if ((PlayerWeapons = this.gameObject.GetComponent<PlayerWeapons>()) is null)
         {
             Debug.LogError("ERROR: <Player> - Player game object is missing PlayerWeapons component.");
+            Application.Quit(1);
+        }
+        
+        if ((Animator = this.gameObject.GetComponent<Animator>()) is null)
+        {
+            Debug.LogError("ERROR: <Player> - Player game object is missing Animator component.");
+            Application.Quit(1);
+        }
+
+        if ((BodyCollider = this.gameObject.GetComponent<CapsuleCollider2D>()) is null)
+        {
+            Debug.LogError("ERROR: <Player> - Player game object is missing CapsuleCollider2D component.");
+            Application.Quit(1);
+        }
+        
+        if ((Rigidbody2D = this.gameObject.GetComponent<Rigidbody2D>()) is null)
+        {
+            Debug.LogError("ERROR: <Player> - Player game object is missing Rigidbody2D component.");
             Application.Quit(1);
         }
         
@@ -372,14 +393,17 @@ public class Player : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             AudioManagement.PlayOneShot(DeathSound);
-            PlayerMovement.CanMove = false;
-            PlayerWeapons.CanUseWeapons = false;
+            PlayerMovement.SetFreeze(true);
+            PlayerMovement.enabled = false;
+            PlayerWeapons.enabled = false;
+            BodyCollider.enabled = false;
+            Animator.enabled = false;
             if (BleedCoroutine is not null)
             {
                 StopCoroutine(BleedCoroutine);
                 BleedCoroutine = null;
             }
-            SpriteRenderer.color = new Color32(255, 100, 100, 255);
+            SpriteRenderer.color = new Color32(255, 50, 50, 200);
             DeathMenu.Activate();
         }
         else if (CanHeal)

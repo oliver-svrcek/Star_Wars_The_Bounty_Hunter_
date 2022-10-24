@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     private float HorizontalMove { get; set; }
     private float WalkSpeed { get; set; }
     private bool Jump { get; set; }
-    public bool CanMove { get; set; }
     
     private void Awake()
     {
@@ -68,46 +67,30 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         Jump = false;
-        CanMove = true;
         HorizontalMove = 0f;
         WalkSpeed = 30f;
     }
 
     private void Update()
     {
-        if (CanMove)
+        HorizontalMove = Input.GetAxisRaw("Horizontal") * WalkSpeed;
+
+        if (Input.GetButton("Jump"))
         {
-            HorizontalMove = Input.GetAxisRaw("Horizontal") * WalkSpeed;
-            if (Rigidbody2D.bodyType != RigidbodyType2D.Dynamic)
-            {
-                Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
-            }
-
-            if (Input.GetButton("Jump"))
-            {
-                Jump = true;
-            }
-
-            if (Input.GetKeyDown("space"))
-            {
-                Jetpack.Activate();
-                HorizontalMove *= 0.9f;
-            }
-            if (Input.GetKeyUp("space"))
-            {
-                Jetpack.Deactivate();
-            }
+            Jump = true;
         }
-        else
+
+        if (Input.GetKeyDown("space"))
         {
-            HorizontalMove = 0;
-            if (CharacterMovementController.IsGrounded && Rigidbody2D.bodyType != RigidbodyType2D.Static)
-            {
-                Rigidbody2D.bodyType = RigidbodyType2D.Static;
-            }
+            Jetpack.Activate();
+            HorizontalMove *= 0.9f;
+        }
+        if (Input.GetKeyUp("space"))
+        {
+            Jetpack.Deactivate();
         }
     }
-    
+
     private void FixedUpdate()
     {
         Move();
@@ -117,5 +100,18 @@ public class PlayerMovement : MonoBehaviour
     private void Move()
     {
         CharacterMovementController.Move(HorizontalMove * Time.fixedDeltaTime, Jump);
+    }
+    
+    public void SetFreeze(bool freeze)
+    {
+        if (freeze)
+        {
+            Rigidbody2D.velocity = Vector2.zero;
+            Rigidbody2D.bodyType = RigidbodyType2D.Static;
+        }
+        else
+        {
+            Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+        }
     }
 }
