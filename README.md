@@ -6,7 +6,7 @@
 **This repository does not contain all of the files and directories 
 of the whole project.
 Only source code game scripts and playable executables for Mac and Windows
-operating systems are included (note Windows 11 may not fully work yet).**
+operating systems are included.**
 
 ## Introduction
 
@@ -34,7 +34,7 @@ more menus such as admin menu to manage player data, player profiles, login scre
 and other things...
 
 So far I was able to rework and make playable only the first level.
-Two more levels are planned. Also character voice lines, parallax background, 
+Two more levels are planned. Also character voice lines, 
 advanced enemy logic using A* pathfinding algorithm and more things are on TO-DO list.
 
 ---
