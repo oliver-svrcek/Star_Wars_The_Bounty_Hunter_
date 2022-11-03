@@ -71,10 +71,10 @@ public class Blaster : MonoBehaviour
             Application.Quit(1);
         }
 
-        BulletPrefab = Resources.Load("Prefabs/Objects/Bullet") as GameObject;
+        BulletPrefab = Resources.Load("Prefabs/Bullet") as GameObject;
         if (BulletPrefab is null)
         {
-            Debug.LogError("ERROR: <Blaster> - Prefabs/objects/Bullet resource was not loaded.");
+            Debug.LogError("ERROR: <Blaster> - Prefabs/Bullet resource was not loaded.");
             Application.Quit(1);
         }
         
