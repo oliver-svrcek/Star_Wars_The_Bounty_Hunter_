@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class AdminMenu : MonoBehaviour
 {
     private AudioManagement AudioManagement { get; set; }
     private TMP_InputField PlayerNameInputField { get; set; }
+    private Scrollbar HorizontalScrollbar { get; set; }
+    private GameObject HeaderGameObject { get; set; }
     private TextMeshProUGUI PlayerDataTextArea { get; set; }
+    private TextMeshProUGUI HeaderText { get; set; }
     private GameObject PrimaryMenuGameObject { get; set; }
     private GameObject UserTypeMenuGameObject { get; set; }
     private GameObject PlayerNotFoundWarningGameObject { get; set; }
     private GameObject PlayerAlreadyExistsWaringGameObject { get; set; }
     private GameObject EmptyPlayerNameWarningGameObject { get; set; }
     private GameObject ConfirmDeleteWarningGameObject { get; set; }
+    private GameObject ConfirmDeleteAllWarningGameObject { get; set; }
     private string PlayerName { get; set; }
+    private float HeaderStartPositionX { get; set; }
 
     private void Awake()
     {
@@ -56,6 +62,51 @@ public class AdminMenu : MonoBehaviour
                 "ERROR: <AdminMenu> - Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/" +
                 "PlayerNameInputField game object is missing TMP_InputField component."
                 );
+            Application.Quit(1);
+        }
+        
+        if (GameObject.Find(
+                "Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/PlayerStats/" +
+                "PlayerData/Scrollbar Horizontal"
+            ) is null)
+        {
+            Debug.LogError(
+                "ERROR: <AdminMenu> - Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/" +
+                "PlayerStats/PlayerData/Scrollbar Horizontal game object was not found in game object hierarchy."
+            );
+            Application.Quit(1);
+        }
+        if((HorizontalScrollbar = GameObject.Find(
+                "Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/PlayerStats/" +
+                "PlayerData/Scrollbar Horizontal"
+            ).GetComponent<Scrollbar>()) is null)
+        {
+            Debug.LogError(
+                "ERROR: <AdminMenu> - Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/" +
+                "PlayerStats/PlayerData/Scrollbar Horizontal game object is missing Scrollbar component."
+            );
+            Application.Quit(1);
+        }
+
+        if ((HeaderGameObject = GameObject.Find(
+                "Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/PlayerStats/Header/Text (TMP)"
+            )) is null)
+        {
+            Debug.LogError(
+                "ERROR: <AdminMenu> - Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/" +
+                "PlayerStats/Header/Text (TMP) game object was not found in game object hierarchy."
+            );
+            Application.Quit(1);
+        }
+        
+        if ((HeaderText = GameObject.Find(
+                "Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/PlayerStats/Header/Text (TMP)"
+            ).GetComponent<TextMeshProUGUI>()) is null)
+        {
+            Debug.LogError(
+                "ERROR: <AdminMenu> - Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/PrimaryMenu/" +
+                "PlayerStats/Header/Text (TMP) game object is missing TextMeshProUGUI component."
+            );
             Application.Quit(1);
         }
         
@@ -147,13 +198,47 @@ public class AdminMenu : MonoBehaviour
                 );
             Application.Quit(1);
         }
+        
+        if ((ConfirmDeleteAllWarningGameObject = GameObject.Find(
+                "Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/ConfirmDeleteAllWarning"
+            )) is null)
+        {
+            Debug.LogError(
+                "ERROR: <AdminMenu> - Interface/MainCamera/UICanvas/UserTypeMenu/AdminMenu/" +
+                "ConfirmDeleteAllWarning game object was not found in game object hierarchy."
+            );
+            Application.Quit(1);
+        }
     }
     
     private void Start()
     {
+        
         PlayerName = "";
+        PlayerDataTextArea.text = "";
+        
+        foreach (string columnName in DatabaseManagement.GetTableHeader("PlayerData"))
+        {
+            if (columnName == "CollectedCoins")
+            {
+                continue;
+            }
+            
+            HeaderText.text += columnName.PadRight(20);
+        }
+        
+        HeaderStartPositionX = HeaderGameObject.transform.position.x;
         
         LoadAllPlayerData();
+    }
+
+    public void MoveHeader()
+    {
+        HeaderGameObject.transform.position = new Vector3(
+            HeaderStartPositionX - (42.4f * HorizontalScrollbar.value),
+            HeaderGameObject.transform.position.y,
+            HeaderGameObject.transform.position.z
+        );
     }
 
     private void LoadSinglePlayerData()
@@ -188,27 +273,19 @@ public class AdminMenu : MonoBehaviour
         foreach (KeyValuePair<string, string> record in entry)
         {
             string value = record.Value;
-            
+
             if (record.Key == "CollectedCoins")
             {
                 continue;
             }
-            if (record.Key == "id")
-            {
-                value = value.PadRight(20);
-            }
-            else if (record.Key == "PositionAxisX" || record.Key == "PositionAxisY")
+            if (record.Key == "PositionAxisX" || record.Key == "PositionAxisY")
             {
                 value = Math.Round(float.Parse(value), 3).ToString();
-                value = value.PadRight(8);
-            }
-            else
-            {
-                value = value.PadRight(8);
             }
 
-            PlayerDataTextArea.text += value + " ";   
+            PlayerDataTextArea.text += value.PadRight(20);
         }
+        PlayerDataTextArea.text += "|";   
     }
 
     public void SearchPlayer()
@@ -280,9 +357,9 @@ public class AdminMenu : MonoBehaviour
 
         if (PlayerName == "")
         {
-            AudioManagement.PlayOneShot("ErrorSound");
+            AudioManagement.PlayOneShot("ButtonSound");
             PrimaryMenuGameObject.SetActive(false);
-            EmptyPlayerNameWarningGameObject.SetActive(true);
+            ConfirmDeleteAllWarningGameObject.SetActive(true);
             return;
         }
         
@@ -306,6 +383,17 @@ public class AdminMenu : MonoBehaviour
         AudioManagement.PlayOneShot("ButtonSound");
         DatabaseManagement.DeleteEntry("PlayerData", PlayerName);
         ConfirmDeleteWarningGameObject.SetActive(false);
+        PrimaryMenuGameObject.SetActive(true);
+        PlayerNameInputField.text = "";
+        PlayerName = "";
+        LoadAllPlayerData();
+    }
+    
+    public void DeleteAllPlayersConfirm()
+    {
+        AudioManagement.PlayOneShot("ButtonSound");
+        DatabaseManagement.DeleteEntries("PlayerData");
+        ConfirmDeleteAllWarningGameObject.SetActive(false);
         PrimaryMenuGameObject.SetActive(true);
         PlayerNameInputField.text = "";
         PlayerName = "";

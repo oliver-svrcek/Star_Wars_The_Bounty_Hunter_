@@ -28,9 +28,9 @@ public abstract class EnemyShooter : Enemy
             Application.Quit(1);
         }
 
-        if ((BulletPrefab = Resources.Load("Prefabs/Bullet") as GameObject) is null)
+        if ((BulletPrefab = Resources.Load("Prefabs/Objects/Bullet") as GameObject) is null)
         {
-            Debug.LogError("ERROR: <EnemyShooter> - Prefabs/Bullet resource was not loaded.");
+            Debug.LogError("ERROR: <EnemyShooter> - Prefabs/Objects/Bullet resource was not loaded.");
             Application.Quit(1);
         }
     }
