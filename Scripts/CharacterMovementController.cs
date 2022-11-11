@@ -4,16 +4,16 @@ using UnityEngine.Events;
 
 public class CharacterMovementController : MonoBehaviour
 {
-	private Animator Animator { get; set; }
-	private Rigidbody2D Rigidbody2D { get; set; }
-	private CapsuleCollider2D BodyCollider  { get; set; }
-	private LayerMask WhatIsGround  { get; set; }
-	private Vector3 velocity;
-	private bool AirControl  { get; set; }
-	public bool IsGrounded { get; private set; }
-	private float JumpForce  { get; set; }
-	private float MovementSmoothing  { get; set; }
-	private bool IsLookingRight { get; set; } = true;
+	protected Animator Animator { get; set; }
+	protected Rigidbody2D Rigidbody2D { get; set; }
+	protected CapsuleCollider2D BodyCollider  { get; set; }
+	protected LayerMask WhatIsGround  { get; set; }
+	protected Vector3 velocity;
+	protected bool AirControl  { get; set; }
+	public bool IsGrounded { get; protected set; }
+	protected float JumpForce  { get; set; }
+	protected float MovementSmoothing  { get; set; }
+	protected bool IsLookingRight { get; set; } = true;
 
 	[Header("Events")]
 	[Space]
@@ -21,7 +21,7 @@ public class CharacterMovementController : MonoBehaviour
 	[System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
 
-	private void Awake()
+	protected void Awake()
 	{
 		if ((Animator = this.gameObject.GetComponent<Animator>()) is null)
 		{
@@ -65,7 +65,7 @@ public class CharacterMovementController : MonoBehaviour
 		}
 	}
 
-	private void FixedUpdate()
+	protected void FixedUpdate()
 	{
 		bool wasGrounded = IsGrounded;
 		IsGrounded = false;
@@ -126,8 +126,8 @@ public class CharacterMovementController : MonoBehaviour
 
 			Vector3 targetVelocity = new Vector2(move * 10f, Rigidbody2D.velocity.y);
 			Rigidbody2D.velocity = Vector3.SmoothDamp(
-					Rigidbody2D.velocity, targetVelocity, ref velocity, MovementSmoothing
-					);
+				Rigidbody2D.velocity, targetVelocity, ref velocity, MovementSmoothing
+			);
 
 			if (move > 0 && !IsLookingRight)
 			{
@@ -148,7 +148,7 @@ public class CharacterMovementController : MonoBehaviour
 		}
 	}
 	
-	private void Flip()
+	protected void Flip()
 	{
 		IsLookingRight = !IsLookingRight;
 		transform.Rotate(0f, 180f, 0f);

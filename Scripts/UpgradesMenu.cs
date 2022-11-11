@@ -373,7 +373,7 @@ public class UpgradesMenu : MonoBehaviour
     {
         if (Player.PlayerData is null)
         {
-            Debug.LogWarning("WARNING:");
+            Debug.LogWarning("WARNING: <UpgradesMenu> - PlayerData is null.");
             return;
         }
         
@@ -392,7 +392,7 @@ public class UpgradesMenu : MonoBehaviour
     {
         gearName = gearName.ToLower();
 
-        if (CoinCount.text.Contains('0') || Player.PlayerData.CoinCount == 0)
+        if (CoinCount.text == "0" || Player.PlayerData.CoinCount == 0)
         {
             AudioManagement.PlayOneShot("ErrorSound");
             return;
@@ -448,7 +448,7 @@ public class UpgradesMenu : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("WARNING:");
+            Debug.LogWarning("WARNING: <UpgradesMenu> - Invalid gear name.");
             return;
         }
         

@@ -1,19 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public abstract class EnemyShooter : Enemy
 {
-    protected Transform Firepoint { get; set; }
-    private GameObject BulletPrefab { get; set; }
-    protected Coroutine ShootCoroutine { get; set; }
-    protected Coroutine ShootStartDelayCoroutine { get; set; }
-    protected float ShootingRate { get; set; }
-    protected int BulletsPerShot { get; set; }
-    protected int BulletDamage { get; set; }
-    protected float BulletSpeed { get; set; }
-    protected string BulletSound { get; set; }
-    protected float ViewRangeHorizontal { get; set; }
-    protected float ViewRangeVertical { get; set; }
+    private Transform Firepoint { get; set; } = null;
+    private GameObject BulletPrefab { get; set; } = null;
+    private Coroutine ShootCoroutine { get; set; } = null;
+    private Coroutine ShootStartDelayCoroutine { get; set; } = null;
+    [field: SerializeField] protected float ShootingRate { get; set; } = 1f;
+    [field: SerializeField] protected int BulletsPerShot { get; set; } = 1;
+    [field: SerializeField] protected int BulletDamage { get; set; } = 0;
+    [field: SerializeField] protected float BulletSpeed { get; set; } = 20f;
+    [field: SerializeField] private string BulletSound { get; set; } = "EnemyBlasterShotSound";
+    [field: SerializeField] private float ViewRangeHorizontal { get; set; } = 11;
+    [field: SerializeField] private float ViewRangeVertical { get; set; } = 1.8f;
 
     protected new void Awake()
     {
@@ -38,16 +39,6 @@ public abstract class EnemyShooter : Enemy
     protected new void Start()
     {
         base.Start();
-        
-        ShootCoroutine = null;
-        ShootStartDelayCoroutine = null;
-        ShootingRate = 1f;
-        BulletsPerShot = 1;
-        BulletDamage = 0;
-        BulletSpeed = 20f;
-        ViewRangeHorizontal = 10.5f;
-        ViewRangeVertical = 1.8f;
-        BulletSound = "EnemyBlasterShotSound";
     }
 
     protected new void Update()
@@ -59,11 +50,12 @@ public abstract class EnemyShooter : Enemy
 
     protected void DetectPlayer()
     {
-        // View range
-        if (Player.transform.position.x > (this.transform.position.x - ViewRangeHorizontal) 
-            && Player.transform.position.x < (this.transform.position.x + ViewRangeHorizontal)
-            && Player.transform.position.y > (this.transform.position.y - ViewRangeVertical)
-            && Player.transform.position.y < (this.transform.position.y + ViewRangeVertical))
+        float horizontalDistance = Player.transform.position.x - this.transform.position.x;
+        float verticalDistance = Player.transform.position.y - this.transform.position.y;
+        
+        
+        if (Math.Abs(horizontalDistance) < ViewRangeHorizontal &&
+            Math.Abs(verticalDistance) < ViewRangeVertical)
         {
             if (ShootCoroutine is null && ShootStartDelayCoroutine is null)
             {

@@ -5,22 +5,23 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    protected Player Player { get; set; }
-    protected AudioManagement AudioManagement { get; set; }
-    private SpriteRenderer SpriteRenderer { get; set; }
-    private CapsuleCollider2D BodyCollider { get; set; }
-    private GameObject HealthBarGameObject { get; set; }
-    private BarManagement HealthBar { get; set; }
-    private TextMeshProUGUI BossName { get; set; }
-    private Coroutine HealCoroutine { get; set; }
-    private Coroutine BleedCoroutine { get; set; }
-    protected int MaximumHealth { get; set; }
-    protected int CurrentHealth { get; set; }
-    protected float HealStartTime { get; set; }
-    protected int HealPoints { get; set; }
-    protected string DeathSound { get; set; }
-    protected bool CanHeal { get; set; }
-    private bool IsLookingRight { get; set; }
+    [field: SerializeField] protected bool UseOnlyEditorValues { get; set; } = false;
+    protected Player Player { get; set; } = null;
+    protected AudioManagement AudioManagement { get; set; } = null;
+    private SpriteRenderer SpriteRenderer { get; set; } = null;
+    protected CapsuleCollider2D BodyCollider { get; set; } = null;
+    private GameObject HealthBarGameObject { get; set; } = null;
+    private BarManagement HealthBar { get; set; } = null;
+    private TextMeshProUGUI BossName { get; set; } = null;
+    private Coroutine HealCoroutine { get; set; } = null;
+    private Coroutine BleedCoroutine { get; set; } = null;
+    [field: SerializeField] protected int MaximumHealth { get; set; } = 0;
+    [field: SerializeField] protected int CurrentHealth { get; set; } = 0;
+    [field: SerializeField] protected float HealStartTime { get; set; } = 0f;
+    [field: SerializeField] protected int HealPoints { get; set; } = 0;
+    [field: SerializeField] protected string DeathSound { get; set; } = "GenericDeathSound";
+    [field: SerializeField] protected bool CanHeal { get; set; } = false;
+    private bool IsLookingRight { get; set; } = true;
 
     protected void Awake()
     {
@@ -134,15 +135,10 @@ public abstract class Enemy : MonoBehaviour
 
     protected void Start()
     {
-        HealCoroutine = null;
-        BleedCoroutine = null;
-        DeathSound = "GenericDeathSound";
-        CanHeal = false;
-        IsLookingRight = true;
         HealthBar.SetMaxValue(1f);
         HealthBar.SetValue(1f);
         HealthBar.SetGradient("EnemyHealth");
-
+        
         if (this.gameObject.CompareTag("Boss"))
         {
             BossName.text = Regex.Replace(this.gameObject.name, "(\\B[A-Z])", " $1");
@@ -163,7 +159,7 @@ public abstract class Enemy : MonoBehaviour
             IsLookingRight = !IsLookingRight;
         }
     }
-    
+
     protected IEnumerator Heal()
     {
         yield return new WaitForSeconds(HealStartTime);
