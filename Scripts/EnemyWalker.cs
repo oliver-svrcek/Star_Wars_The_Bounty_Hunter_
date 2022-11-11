@@ -1,19 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public abstract class EnemyWalker : Enemy
 {
-    protected Coroutine MeleeAttackCoroutine { get; set; }
-    protected Coroutine MeleeAttackStartDelayCoroutine { get; set; }
-    protected Vector3 PatrolStartPosition { get; set; }
-    protected Vector3 PatrolEndPosition { get; set; }
-    protected Vector3 PatrolTargetPosition { get; set; }
-    protected int Damage { get; set; }
-    protected float Speed { get; set; }
+    private Coroutine MeleeAttackCoroutine { get; set; } = null;
+    private Coroutine MeleeAttackStartDelayCoroutine { get; set; } = null;
+    private Vector3 PatrolStartPosition { get; set; } = new Vector3();
+    private Vector3 PatrolEndPosition { get; set; } = new Vector3();
+    private Vector3 PatrolTargetPosition { get; set; } = new Vector3();
+    private CharacterMovementController CharacterMovementController { get; set; } = null;
+    private float HorizontalMove { get; set; } = 0f;
+    private bool Jump { get; set; } = false;
+    protected int Damage { get; set; } = 0;
+    protected float Speed { get; set; } = 30f;
     
     protected new void Awake()
     {
         base.Awake();
+        
+        if ((CharacterMovementController = this.gameObject.GetComponent<CharacterMovementController>()) is null) 
+        {
+            Debug.LogError(
+                 "ERROR: <EnemyChaser> - Player game object is missing CharacterMovementController component."
+                 );
+            Application.Quit(1);
+        }
         
         if (this.gameObject.transform.Find("PatrolEndPosition") is null)
         {
@@ -29,22 +41,31 @@ public abstract class EnemyWalker : Enemy
     {
         base.Start();
         
-        MeleeAttackCoroutine = null;
         PatrolStartPosition = this.gameObject.transform.position;
         PatrolEndPosition = this.gameObject.transform.Find("PatrolEndPosition").position;
         PatrolTargetPosition = PatrolEndPosition;
     }
-    
+
     protected new void Update()
-    {
-        Move();
+    { 
+        HorizontalMove = 0 * Speed;
+        
+        Patrol();
     }
 
-    protected void Move()
+    private void Patrol()
     {
-        if (Vector2.Distance(transform.position, PatrolTargetPosition) < 0.01f)
+        if (PatrolTargetPosition.Equals(PatrolEndPosition))
         {
-            transform.Rotate(0f, 180f, 0f);
+            HorizontalMove = 1 * Speed;
+        }
+        else
+        {
+            HorizontalMove = -1 * Speed;
+        }
+        
+        if (Math.Abs(this.gameObject.transform.position.x - PatrolTargetPosition.x) < 0.1f)
+        {
             if (PatrolTargetPosition.Equals(PatrolStartPosition))
             {
                 PatrolTargetPosition = PatrolEndPosition;
@@ -54,12 +75,17 @@ public abstract class EnemyWalker : Enemy
                 PatrolTargetPosition = PatrolStartPosition;
             }
         }
-        
-        transform.position = Vector2.MoveTowards(
-            transform.position, 
-            PatrolTargetPosition, 
-            Speed * Time.deltaTime
-            );
+    }
+
+    private void FixedUpdate()
+    {
+        Move(); 
+        Jump = false;
+    }
+
+    private void Move()
+    { 
+        CharacterMovementController.Move(HorizontalMove * Time.fixedDeltaTime, Jump);
     }
     
     protected void OnCollisionEnter2D(Collision2D other)

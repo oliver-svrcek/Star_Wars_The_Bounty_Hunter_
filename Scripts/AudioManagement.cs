@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using JetBrains.Annotations;
 using Random=UnityEngine.Random;
 
 public class AudioManagement : MonoBehaviour
@@ -118,7 +119,7 @@ public class AudioManagement : MonoBehaviour
     {
         AudioSource.loop = loop;
     }
-
+    
     public void PlayClipAtPoint(string audioClipName, Vector3 pointInSpace)
     {
         AudioClip audioClip;
@@ -134,6 +135,7 @@ public class AudioManagement : MonoBehaviour
         AudioSource audioSource = audioGameObject.GetComponent<AudioSource>();
         audioSource.clip = audioClip;
         audioSource.loop = false;
+        audioSource.volume = AudioSource.volume;
         audioSource.spatialBlend = 1f;
         audioSource.dopplerLevel = 0f;
         audioSource.rolloffMode = AudioRolloffMode.Linear;
@@ -141,13 +143,7 @@ public class AudioManagement : MonoBehaviour
         audioSource.maxDistance = 15f;
         
         audioSource.Play();
-        StartCoroutine(DestroyAfterTime(audioGameObject, audioClip.length));
-    }
-
-    private IEnumerator DestroyAfterTime(GameObject gameObject, float timeInSeconds)
-    {
-        yield return new WaitForSeconds(timeInSeconds);
-        Destroy(gameObject);
+        Destroy(audioGameObject, audioClip.length);
     }
 
     public void Play(string audioClipName, bool loop)

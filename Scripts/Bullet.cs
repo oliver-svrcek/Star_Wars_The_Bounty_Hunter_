@@ -101,10 +101,7 @@ public class Bullet : MonoBehaviour
             Enemy enemy;
             if ((enemy = other.gameObject.GetComponentInParent<Enemy>()) is not null)
             {
-                AudioManagement.PlayClipAtPoint
-                ("HitmarkerSound", 
-                    this.gameObject.transform.position
-                );
+                AudioManagement.PlayClipAtPoint("HitmarkerSound", this.gameObject.transform.position);
                 enemy.TakeDamage(Damage);
             }
         }
@@ -119,11 +116,8 @@ public class Bullet : MonoBehaviour
             {
                 Player player;
                 if ((player = other.gameObject.GetComponentInParent<Player>()) is not null)
-                {
-                    AudioManagement.PlayClipAtPoint
-                        ("HitmarkerSound", 
-                            this.gameObject.transform.position
-                            );
+                { 
+                    AudioManagement.PlayClipAtPoint("HitmarkerSound", this.gameObject.transform.position);
                     player.TakeDamage(Damage);
                 }
             }

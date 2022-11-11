@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -29,6 +31,12 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("ERROR: <Player> - ActivePlayer.PlayerData is null.");
             Application.Quit(1);
+            
+            if (Application.isEditor)
+            {
+                Debug.LogWarning("WARNING: <Player> - Loading development player data.");
+                LoadDevelopmentPlayerProfile();
+            }
         }
 
         if ((PlayerMovement = this.gameObject.GetComponent<PlayerMovement>()) is null)
@@ -153,6 +161,34 @@ public class Player : MonoBehaviour
         DeathSound = "PlayerDeathSound";
         CanHeal = true;
     }
+
+    private void LoadDevelopmentPlayerProfile()
+    {
+        DatabaseManagement.InitialiseConnection(Application.persistentDataPath + "/" + "PlayerDataDB");
+        DatabaseManagement.CreateTable(new DatabaseTable("PlayerData", 
+            new List<string>()
+            {
+                "SceneBuildIndex", "PositionAxisX", "PositionAxisY", "CoinCount", "CollectedCoins",
+                "ArmorLevel", "BlasterLevel", "JetpackLevel", "FlamethrowerLevel"
+            }));
+
+        PlayerData playerData = new PlayerData("DEV");
+        if (!DatabaseManagement.EntryExists("PlayerData", playerData.Name))
+        {
+            playerData.SaveNewData();
+        }
+        else
+        {
+            playerData.ResetData();
+        }
+        
+        ActivePlayer.PlayerData = playerData;
+        ActivePlayer.PlayerData.CoinCount = 99;
+        ActivePlayer.PlayerData.PositionAxisX = 0;
+        ActivePlayer.PlayerData.PositionAxisY = 0;
+        ActivePlayer.PlayerData.SceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
+        ActivePlayer.PlayerData.UpdateData();
+    }
     
     private void Start()
     {
@@ -162,6 +198,15 @@ public class Player : MonoBehaviour
         
         ReloadGearValues();
         this.transform.position = new Vector3(PlayerData.PositionAxisX, PlayerData.PositionAxisY, 0);
+
+        if (Application.isEditor)
+        {
+            AudioManagement.PlayOneShot("ButtonSound");
+        }
+        else
+        {
+            AudioManagement.PlayOneShot("ErrorSound");
+        }
     }
 
     private void Update()
