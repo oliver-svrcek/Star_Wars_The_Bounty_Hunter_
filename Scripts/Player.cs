@@ -198,15 +198,6 @@ public class Player : MonoBehaviour
         
         ReloadGearValues();
         this.transform.position = new Vector3(PlayerData.PositionAxisX, PlayerData.PositionAxisY, 0);
-
-        if (Application.isEditor)
-        {
-            AudioManagement.PlayOneShot("ButtonSound");
-        }
-        else
-        {
-            AudioManagement.PlayOneShot("ErrorSound");
-        }
     }
 
     private void Update()
