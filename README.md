@@ -44,7 +44,9 @@ It is not intended to generate any monetary profit.**
 
 ---
 
-## Screenshots form the game
+## Game showcase
+
+https://user-images.githubusercontent.com/75705745/201552042-813e07df-a0d3-430e-8397-449deaa0ed38.mov
 
 ![Image_2](https://user-images.githubusercontent.com/75705745/193413736-44fa3d22-1679-4a43-9e63-541c971355b4.png)
 ![Image_3](https://user-images.githubusercontent.com/75705745/193413740-20a982e6-4cb1-41e0-a505-0b08da82a17a.png)
