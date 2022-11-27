@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class PlayerLoginMenuManagement : MonoBehaviour
 {
-    private AudioManagement AudioManagement { get; set; }
-    private TMP_InputField PlayerNameInputField { get; set; }
-    private GameObject PrimaryMenuGameObject { get; set; }
-    private GameObject PlayerMainMenuGameObject { get; set; }
-    private GameObject UserTypeMenuGameObject { get; set; }
-    private GameObject PlayerNotFoundWarningGameObject { get; set; }
-    private GameObject PlayerAlreadyExistsWaringGameObject { get; set; }
-    private GameObject EmptyPlayerNameWarningGameObject { get; set; }
+    private AudioManagement AudioManagement { get; set; } = null;
+    private TMP_InputField PlayerNameInputField { get; set; } = null;
+    private GameObject PrimaryMenuGameObject { get; set; } = null;
+    private GameObject PlayerMainMenuGameObject { get; set; } = null;
+    private GameObject UserTypeMenuGameObject { get; set; } = null;
+    private GameObject PlayerNotFoundWarningGameObject { get; set; } = null;
+    private GameObject PlayerAlreadyExistsWaringGameObject { get; set; } = null;
+    private GameObject EmptyPlayerNameWarningGameObject { get; set; } = null;
     
     private void Awake()
     {

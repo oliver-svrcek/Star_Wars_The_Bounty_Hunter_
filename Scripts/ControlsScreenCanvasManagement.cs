@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ControlsScreenCanvasManagement : MonoBehaviour
 {
-    private Vector3 FixedPosition { get; set; }
+    private Vector3 FixedPosition { get; set; } = new Vector3();
     
     private void Start()
     {

@@ -2,9 +2,9 @@
 
 public class PlayerWeapons : MonoBehaviour
 {
-    private AudioManagement AudioManagement { get; set; }
-    public Blaster Blaster { get; private set; }
-    public Flamethrower Flamethrower { get; private set; }
+    private AudioManagement AudioManagement { get; set; } = null;
+    public Blaster Blaster { get; private set; } = null;
+    public Flamethrower Flamethrower { get; private set; } = null;
 
     private void Awake()
      {

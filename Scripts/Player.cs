@@ -5,26 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public PlayerData PlayerData { get; set; }
-    private PlayerMovement PlayerMovement { get; set; }
-    private PlayerWeapons PlayerWeapons { get; set; }
-    private SpriteRenderer SpriteRenderer { get; set; }
-    private Animator Animator { get; set; }
-    private CapsuleCollider2D BodyCollider { get; set; }
-    private Rigidbody2D Rigidbody2D { get; set; }
-    private AudioManagement AudioManagement { get; set; }
-    private PauseMenu PauseMenu { get; set; }
-    private DeathMenu DeathMenu { get; set; }
-    private BarManagement HealthBar { get; set; }
-    private Coroutine HealCoroutine { get; set; }
-    private Coroutine BleedCoroutine { get; set; }
-    private int MaximumHealth { get; set; }
-    private int CurrentHealth { get; set; }
-    private float HealStartTime { get; set; }
-    private int HealPoints { get; set; }
-    private string DeathSound { get; set; }
-    private bool CanHeal { get; set; }
-    
+    public PlayerData PlayerData { get; private set; } = null;
+    private PlayerMovement PlayerMovement { get; set; } = null;
+    private PlayerWeapons PlayerWeapons { get; set; } = null;
+    private SpriteRenderer SpriteRenderer { get; set; } = null;
+    private Animator Animator { get; set; } = null;
+    private CapsuleCollider2D BodyCollider { get; set; } = null;
+    private Rigidbody2D Rigidbody2D { get; set; } = null;
+    private AudioManagement AudioManagement { get; set; } = null;
+    private PauseMenu PauseMenu { get; set; } = null;
+    private DeathMenu DeathMenu { get; set; } = null;
+    private BarManagement HealthBar { get; set; } = null;
+    private Coroutine HealCoroutine { get; set; } = null;
+    private Coroutine BleedCoroutine { get; set; } = null;
+    private int MaximumHealth { get; set; } = 10000;
+    private int CurrentHealth { get; set; } = 0;
+    private float HealStartTime { get; set; } = 4.5f;
+    private int HealPoints { get; set; } = 10;
+    private string DeathSound { get; set; } = "PlayerDeathSound";
+    private bool CanHeal { get; set; } = true;
+
     private void Awake()
     {
         if (ActivePlayer.PlayerData is null)
@@ -152,14 +152,6 @@ public class Player : MonoBehaviour
         }
 
         PlayerData = ActivePlayer.PlayerData;
-        MaximumHealth = 10000;
-        CurrentHealth = MaximumHealth;
-        HealStartTime = 4.5f;
-        HealPoints = 10;
-        HealCoroutine = null;
-        BleedCoroutine = null;
-        DeathSound = "PlayerDeathSound";
-        CanHeal = true;
     }
 
     private void LoadDevelopmentPlayerProfile()
@@ -192,6 +184,8 @@ public class Player : MonoBehaviour
     
     private void Start()
     {
+        CurrentHealth = MaximumHealth;
+        
         HealthBar.SetMaxValue(1f);
         HealthBar.SetValue(1f);
         HealthBar.SetGradient("Decreasing");
@@ -255,7 +249,7 @@ public class Player : MonoBehaviour
         ReloadHealth();
     }
     
-    public void ReloadHealth()
+    private void ReloadHealth()
     {
         if (HealCoroutine is not null)
         {

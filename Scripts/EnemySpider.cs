@@ -1,6 +1,6 @@
 public class EnemySpider : EnemyWalker
 {
-    protected new void Start()
+    private new void Start()
     {
         base.Start();
 

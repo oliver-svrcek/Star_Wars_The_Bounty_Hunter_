@@ -1,24 +1,25 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class Jetpack : MonoBehaviour
 {
-    private Animator Animator { get; set; }
-    private CharacterMovementController CharacterMovementController { get; set; }
-    private Rigidbody2D Rigidbody2D { get; set; }
-    private AudioManagement AudioManagement { get; set; }
-    private BarManagement JetpackFuelBar { get; set; }
-    public bool Fly { get; set; }
-    private Coroutine BurnFuelCoroutine { get; set; }
-    private Coroutine RechargeFuelCoroutine { get; set; }
-    public int MaximumJetpackFuel { get; set; }
-    public int CurrentJetpackFuel { get; set; }
-    public int JetpackFuelConsumptionInitialPoints { get; set; }
-    public int JetpackFuelConsumptionPoints { get; set; }
-    public float JetpackFuelConsumptionRate { get; set; }
-    public int JetpackFuelRechargePoints { get; set; }
-    public float JetpackFuelRechargeStartTime { get; set; }
-    public float JetpackFuelRechargeRate { get; set; }
+    private Animator Animator { get; set; } = null;
+    private CharacterMovementController CharacterMovementController { get; set; } = null;
+    private Rigidbody2D Rigidbody2D { get; set; } = null;
+    private AudioManagement AudioManagement { get; set; } = null;
+    private BarManagement JetpackFuelBar { get; set; } = null;
+    private bool Fly { get; set; } = false;
+    private Coroutine BurnFuelCoroutine { get; set; } = null;
+    private Coroutine RechargeFuelCoroutine { get; set; } = null;
+    private int MaximumJetpackFuel { get; set; } = 10000;
+    private int CurrentJetpackFuel { get; set; } = 0;
+    public int JetpackFuelConsumptionInitialPoints { get; set; } = 800;
+    public int JetpackFuelConsumptionPoints { get; set; } = 70;
+    public float JetpackFuelConsumptionRate { get; set; } = 0.01f;
+    public int JetpackFuelRechargePoints { get; set; } = 30;
+    public float JetpackFuelRechargeStartTime { get; set; } = 1.2f;
+    public float JetpackFuelRechargeRate { get; set; } = 0.01f;
 
     private void Awake()
     {
@@ -91,22 +92,11 @@ public class Jetpack : MonoBehaviour
                 );
             Application.Quit(1);
         }
-        
-        Fly = false;
-        BurnFuelCoroutine = null;
-        RechargeFuelCoroutine = null;
-        MaximumJetpackFuel = 10000;
-        CurrentJetpackFuel = MaximumJetpackFuel;
-        JetpackFuelConsumptionInitialPoints = 800;
-        JetpackFuelConsumptionPoints = 70;
-        JetpackFuelConsumptionRate = 0.01f;
-        JetpackFuelRechargePoints = 30;
-        JetpackFuelRechargeStartTime = 1.2f;
-        JetpackFuelRechargeRate = 0.01f;
     }
 
     private void Start()
     {
+        CurrentJetpackFuel = MaximumJetpackFuel;
         AudioManagement.Play("FlameSoundLong", true);
         AudioManagement.SetPause(true);
         JetpackFuelBar.SetMaxValue(1f);

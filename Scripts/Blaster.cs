@@ -3,23 +3,23 @@ using UnityEngine;
 
 public class Blaster : MonoBehaviour
 {
-    private Animator Animator { get; set; }
-    private AudioManagement AudioManagement { get; set; }
-    private BarManagement BlasterHeatBar { get; set; }
-    private GameObject BulletPrefab { get; set; }
-    public Coroutine ShootCoroutine { get; private set; }
-    public Coroutine CoolingCoroutine { get; private set; }
-    public Coroutine OverheatCoroutine { get; private set; }
-    public int MaximumBlasterHeat { get; set; }
-    private int CurrentBlasterHeat { get; set; }
-    public int BlasterHeatPerShot { get; set; }
-    public float BlasterCoolingStartTime { get; set; }
-    public int BlasterCoolingPower { get; set; }
-    public float BlasterOverheatCoolingStartTime { get; set; }
-    public int BlasterOverheatCoolingPower { get; set; }
-    public int BulletDamage { get; set; }
-    private float BulletSpeed { get; set; }
-    private string BulletSound { get; set; }
+    private Animator Animator { get; set; } = null;
+    private AudioManagement AudioManagement { get; set; }  = null;
+    private BarManagement BlasterHeatBar { get; set; } = null;
+    private GameObject BulletPrefab { get; set; } = null;
+    private Coroutine ShootCoroutine { get; set; } = null;
+    private Coroutine CoolingCoroutine { get; set; } = null;
+    private Coroutine OverheatCoroutine { get; set; } = null;
+    public int MaximumBlasterHeat { get; set; } = 10000;
+    private int CurrentBlasterHeat { get; set; } = 0;
+    public int BlasterHeatPerShot { get; set; } = 2000;
+    public float BlasterCoolingStartTime { get; set; } = 0.2f;
+    public int BlasterCoolingPower { get; set; } = 100;
+    public float BlasterOverheatCoolingStartTime { get; set; } = 0.6f;
+    public int BlasterOverheatCoolingPower { get; set; } = 60;
+    public int BulletDamage { get; set; } = 2000;
+    private float BulletSpeed { get; set; } = 20f;
+    private string BulletSound { get; set; } = "PlayerBlasterShotSound";
 
     private void Awake()
     {

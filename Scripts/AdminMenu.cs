@@ -7,21 +7,21 @@ using UnityEngine.UI;
 
 public class AdminMenu : MonoBehaviour
 {
-    private AudioManagement AudioManagement { get; set; }
-    private TMP_InputField PlayerNameInputField { get; set; }
-    private Scrollbar HorizontalScrollbar { get; set; }
-    private GameObject HeaderGameObject { get; set; }
-    private TextMeshProUGUI PlayerDataTextArea { get; set; }
-    private TextMeshProUGUI HeaderText { get; set; }
-    private GameObject PrimaryMenuGameObject { get; set; }
-    private GameObject UserTypeMenuGameObject { get; set; }
-    private GameObject PlayerNotFoundWarningGameObject { get; set; }
-    private GameObject PlayerAlreadyExistsWaringGameObject { get; set; }
-    private GameObject EmptyPlayerNameWarningGameObject { get; set; }
-    private GameObject ConfirmDeleteWarningGameObject { get; set; }
-    private GameObject ConfirmDeleteAllWarningGameObject { get; set; }
-    private string PlayerName { get; set; }
-    private float HeaderStartPositionX { get; set; }
+    private AudioManagement AudioManagement { get; set; } = null;
+    private TMP_InputField PlayerNameInputField { get; set; } = null;
+    private Scrollbar HorizontalScrollbar { get; set; } = null;
+    private GameObject HeaderGameObject { get; set; } = null;
+    private TextMeshProUGUI PlayerDataTextArea { get; set; } = null;
+    private TextMeshProUGUI HeaderText { get; set; } = null;
+    private GameObject PrimaryMenuGameObject { get; set; } = null;
+    private GameObject UserTypeMenuGameObject { get; set; } = null;
+    private GameObject PlayerNotFoundWarningGameObject { get; set; } = null;
+    private GameObject PlayerAlreadyExistsWaringGameObject { get; set; } = null;
+    private GameObject EmptyPlayerNameWarningGameObject { get; set; } = null;
+    private GameObject ConfirmDeleteWarningGameObject { get; set; } = null;
+    private GameObject ConfirmDeleteAllWarningGameObject { get; set; } = null;
+    private string PlayerName { get; set; } = "";
+    private float HeaderStartPositionX { get; set; } = 0f;
 
     private void Awake()
     {
@@ -213,8 +213,6 @@ public class AdminMenu : MonoBehaviour
     
     private void Start()
     {
-        
-        PlayerName = "";
         PlayerDataTextArea.text = "";
         
         foreach (string columnName in DatabaseManagement.GetTableHeader("PlayerData"))

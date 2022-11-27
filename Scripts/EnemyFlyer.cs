@@ -63,7 +63,7 @@ public abstract class EnemyFlyer : Enemy
         }
     }
 
-    protected void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -74,7 +74,7 @@ public abstract class EnemyFlyer : Enemy
         }
     }
     
-    protected void OnCollisionStay2D(Collision2D other)
+    private void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -85,7 +85,7 @@ public abstract class EnemyFlyer : Enemy
         }
     }
     
-    protected void OnCollisionExit2D(Collision2D other)
+    private void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -98,7 +98,7 @@ public abstract class EnemyFlyer : Enemy
         }
     }
 
-    protected IEnumerator MeleeAttack()
+    private IEnumerator MeleeAttack()
     {
         while (true)
         {

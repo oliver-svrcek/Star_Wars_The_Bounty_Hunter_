@@ -7,16 +7,16 @@ using UnityEngine.SceneManagement;
 
 public class DialogueManagement : MonoBehaviour
 {
-    private FadeManagement FadeManagement { get; set; }
-    private AudioManagement AudioManagement { get; set; }
-    private RectTransform DialogueBoxRectTransform { get; set; }
-    private TextMeshProUGUI CharacterNameText { get; set; }
-    private TextMeshProUGUI DialogueLineText { get; set; }
-    private GameObject PrevButtonDeactivatorGameObject { get; set; }
-    private GameObject NextButtonDeactivatorGameObject { get; set; }
-    private List<DialogueLine> DialogueLines { get; set; }
-    protected Coroutine PrintLettersCoroutine { get; set; }
-    private int CurrentLineIndex { get; set; }
+    private FadeManagement FadeManagement { get; set; } = null;
+    private AudioManagement AudioManagement { get; set; } = null;
+    private RectTransform DialogueBoxRectTransform { get; set; } = null;
+    private TextMeshProUGUI CharacterNameText { get; set; } = null;
+    private TextMeshProUGUI DialogueLineText { get; set; } = null;
+    private GameObject PrevButtonDeactivatorGameObject { get; set; } = null;
+    private GameObject NextButtonDeactivatorGameObject { get; set; } = null;
+    private List<DialogueLine> DialogueLines { get; set; } = new List<DialogueLine>();
+    private Coroutine PrintLettersCoroutine { get; set; } = null;
+    private int CurrentLineIndex { get; set; } = 0;
 
     private void Awake()
     {
@@ -163,8 +163,6 @@ public class DialogueManagement : MonoBehaviour
 
     private void Start()
     {
-        PrintLettersCoroutine = null;
-        CurrentLineIndex = 0;
         PrintLine();
     }
 

@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
-{ 
-    private FadeManagement FadeManagement { get; set; }
-    private AudioManagement AudioManagement { get; set; }
-    private GameObject PrimaryMenuGameObject { get; set; }
-    private GameObject UpgradesMenuGameObject { get; set; }
-    private GameObject ExitWarningGameObject{ get; set; }
-    private UpgradesMenu UpgradesMenu { get; set; }
-    public bool CanPause { get; private set; }
-    public bool Paused { get; private set; }
+{
+    private FadeManagement FadeManagement { get; set; } = null;
+    private AudioManagement AudioManagement { get; set; } = null;
+    private GameObject PrimaryMenuGameObject { get; set; } = null;
+    private GameObject UpgradesMenuGameObject { get; set; } = null;
+    private GameObject ExitWarningGameObject { get; set; } = null;
+    private UpgradesMenu UpgradesMenu { get; set; } = null;
+    private bool CanPause { get; set; } = true;
+    public bool Paused { get; private set; } = false;
 
     private void Awake()
     {
@@ -90,11 +90,6 @@ public class PauseMenu : MonoBehaviour
                 );
             Application.Quit(1);
         }
-    }
-
-    private void Start()
-    {
-        CanPause = true;
     }
 
     public void ResumeClick()

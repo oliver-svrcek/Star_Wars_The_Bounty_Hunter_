@@ -1,7 +1,7 @@
     
 public class EnemyRebelTrooper : EnemyShooter
 {
-    protected new void Start()
+    private new void Start()
     {
         base.Start();
 

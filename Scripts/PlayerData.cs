@@ -6,16 +6,16 @@ using UnityEngine;
 
 public class PlayerData
 {
-    public string Name { get; private set; }
-    public int SceneBuildIndex { get; set; }  // saved level
-    public float PositionAxisX { get; set; }
-    public float PositionAxisY { get; set; }
-    public int CoinCount { get; set; }
-    public Dictionary<string, List<string>> CollectedCoins { get; set; }
-    public int ArmorLevel { get; set; }
-    public int BlasterLevel { get; set; }
-    public int JetpackLevel { get; set; }
-    public int FlamethrowerLevel { get; set; }
+    public string Name { get; private set; } = "";
+    public int SceneBuildIndex { get; set; } = 0;  // saved level
+    public float PositionAxisX { get; set; } = 0f;
+    public float PositionAxisY { get; set; } = 0f;
+    public int CoinCount { get; set; } = 0;
+    public Dictionary<string, List<string>> CollectedCoins { get; private set; } = null;
+    public int ArmorLevel { get; set; } = 0;
+    public int BlasterLevel { get; set; } = 0;
+    public int JetpackLevel { get; set; } = 0;
+    public int FlamethrowerLevel { get; set; } = 0;
     
     public PlayerData(string playerName)
     {

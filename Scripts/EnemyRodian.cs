@@ -1,7 +1,7 @@
 
 public class EnemyRodian : EnemyShooter
 {
-    protected new void Start()
+    private new void Start()
     {
         base.Start();
 

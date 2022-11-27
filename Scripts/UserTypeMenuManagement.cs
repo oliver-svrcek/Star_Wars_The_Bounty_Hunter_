@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class UserTypeMenuManagement : MonoBehaviour
 {
-    private AudioManagement AudioManagement { get; set; }
-    private GameObject PrimaryMenuGameObject { get; set; }
-    private GameObject PlayerLoginMenuGameObject { get; set; }
-    private GameObject AdminMenuGameObject { get; set; }
-    private AdminMenu AdminMenu { get; set; }
+    private AudioManagement AudioManagement { get; set; } = null;
+    private GameObject PrimaryMenuGameObject { get; set; } = null;
+    private GameObject PlayerLoginMenuGameObject { get; set; } = null;
+    private GameObject AdminMenuGameObject { get; set; } = null;
+    private AdminMenu AdminMenu { get; set; } = null;
 
     private void Awake()
     {

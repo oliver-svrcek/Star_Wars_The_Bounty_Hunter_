@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    protected Coroutine MoveStartDelayCoroutine { get; set; }
-    protected Vector3 MoveStartPosition { get; set; }
-    protected Vector3 MoveEndPosition { get; set; }
-    protected Vector3 MoveTargetPosition { get; set; }
-    [field: SerializeField] protected float Speed { get; set; } = 4f;
-    [field: SerializeField] protected float MoveStartDelayTime { get; set; } = 0f;
+    private Coroutine MoveStartDelayCoroutine { get; set; } = null;
+    private Vector3 MoveStartPosition { get; set; } = new Vector3();
+    private Vector3 MoveEndPosition { get; set; } = new Vector3();
+    private Vector3 MoveTargetPosition { get; set; } = new Vector3();
+    [field: SerializeField] private float Speed { get; set; } = 4f;
+    [field: SerializeField] private float MoveStartDelayTime { get; set; } = 0f;
 
     protected void Awake()
     {
@@ -31,7 +31,7 @@ public class MovingPlatform : MonoBehaviour
         MoveStartDelayCoroutine = StartCoroutine(MoveStartDelay());
     }
 
-    protected void Update()
+    private void Update()
     {   
         if (MoveStartDelayCoroutine is null)
         {
@@ -39,7 +39,7 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    protected void Move()
+    private void Move()
     {
         if (Vector2.Distance(transform.position, MoveTargetPosition) < 0.01f)
         {
@@ -58,7 +58,7 @@ public class MovingPlatform : MonoBehaviour
             );
     }
     
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     { 
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -71,7 +71,7 @@ public class MovingPlatform : MonoBehaviour
         }
     }
     
-    void OnTriggerExit2D(Collider2D collision) 
+    private void OnTriggerExit2D(Collider2D collision) 
     {   
         if (collision.gameObject.CompareTag("Player"))
         {

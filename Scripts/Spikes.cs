@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
-    private AudioManagement AudioManagement { get; set; }
-    private int Damage { get; set; }
+    private AudioManagement AudioManagement { get; set; } = null;
+    private int Damage { get; set; } = int.MaxValue;
 
     private void Awake()
     {
@@ -16,11 +16,9 @@ public class Spikes : MonoBehaviour
                 );
             Application.Quit(1);
         }
-        
-        Damage = int.MaxValue;
     }
     
-    protected void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {

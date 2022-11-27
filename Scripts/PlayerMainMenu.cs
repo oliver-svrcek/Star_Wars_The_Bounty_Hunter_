@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PlayerMainMenu : MonoBehaviour
 {
-    private FadeManagement FadeManagement { get; set; }
-    private AudioManagement AudioManagement { get; set; }
-    private GameObject PrimaryMenuGameObject { get; set; }
-    private GameObject PlayerLoginMenuGameObject { get; set; }
-    private GameObject SaveDataNotFoundWarningGameObject { get; set; }
-    private GameObject NewGameOverwriteWarningGameObject { get; set; }
+    private FadeManagement FadeManagement { get; set; } = null;
+    private AudioManagement AudioManagement { get; set; } = null;
+    private GameObject PrimaryMenuGameObject { get; set; } = null;
+    private GameObject PlayerLoginMenuGameObject { get; set; } = null;
+    private GameObject SaveDataNotFoundWarningGameObject { get; set; } = null;
+    private GameObject NewGameOverwriteWarningGameObject { get; set; } = null;
     
     private void Awake()
     {

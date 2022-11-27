@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Coin : MonoBehaviour
 {
-    private AudioManagement AudioManagement { get; set; }
+    private AudioManagement AudioManagement { get; set; } = null;
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class Coin : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {

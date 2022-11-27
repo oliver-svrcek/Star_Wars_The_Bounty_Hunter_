@@ -6,8 +6,8 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     [field: SerializeField] protected bool UseOnlyEditorValues { get; set; } = false;
-    protected Player Player { get; set; } = null;
-    protected AudioManagement AudioManagement { get; set; } = null;
+    protected Player Player { get; private set; } = null;
+    protected AudioManagement AudioManagement { get; private set; } = null;
     private SpriteRenderer SpriteRenderer { get; set; } = null;
     protected CapsuleCollider2D BodyCollider { get; set; } = null;
     private GameObject HealthBarGameObject { get; set; } = null;
@@ -160,7 +160,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    protected IEnumerator Heal()
+    private IEnumerator Heal()
     {
         yield return new WaitForSeconds(HealStartTime);
 

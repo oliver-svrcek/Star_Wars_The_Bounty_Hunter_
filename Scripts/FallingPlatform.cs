@@ -2,10 +2,10 @@
 
 public class FallingPlatform : MonoBehaviour
 {
-    private AudioManagement AudioManagement { get; set; }
-    private Rigidbody2D Rigidbody2D { get; set; }
-    private GameObject DetectionArea { get; set; }
-    private GameObject Spikes { get; set; }
+    private AudioManagement AudioManagement { get; set; } = null;
+    private Rigidbody2D Rigidbody2D { get; set; } = null;
+    private GameObject DetectionAreaGameObject { get; set; } = null;
+    private GameObject SpikesGameObject { get; set; } = null;
     
     private void Awake()
     {
@@ -35,7 +35,7 @@ public class FallingPlatform : MonoBehaviour
             );
             Application.Quit(1);
         }
-        DetectionArea = this.gameObject.transform.Find("DetectionArea").gameObject;
+        DetectionAreaGameObject = this.gameObject.transform.Find("DetectionArea").gameObject;
         
         if (this.gameObject.transform.Find("SpikesLong") is null)
         {
@@ -45,17 +45,17 @@ public class FallingPlatform : MonoBehaviour
                 );
             Application.Quit(1);
         }
-        Spikes = this.gameObject.transform.Find("SpikesLong").gameObject;
+        SpikesGameObject = this.gameObject.transform.Find("SpikesLong").gameObject;
     }
     
-    protected void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            DetectionArea.SetActive(false);
+            DetectionAreaGameObject.SetActive(false);
             AudioManagement.PlayOneShot("FallingPlatformSound");
             Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
-            Spikes.SetActive(true);
+            SpikesGameObject.SetActive(true);
         }
     }
 }

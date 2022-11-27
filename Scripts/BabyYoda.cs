@@ -17,7 +17,7 @@ public class BabyYoda : MonoBehaviour
     private bool Activated { get; set; } = false;
     private bool IsLookingRight { get; set; } = true;
     
-    protected void Awake()
+    private void Awake()
     {
         if ((AIPath = this.gameObject.GetComponent<AIPath>()) is null)
         {
@@ -76,13 +76,13 @@ public class BabyYoda : MonoBehaviour
         }
     }
 
-    protected void Start()
+    private void Start()
     {
         AIDestinationSetter.target = Player.transform;
         AIPath.canMove = false;
     }
     
-    protected void Update()
+    private void Update()
     {
         LookAtPlayer();
         
@@ -107,7 +107,7 @@ public class BabyYoda : MonoBehaviour
         }
     }
     
-    protected void LookAtPlayer()
+    private void LookAtPlayer()
     {
         if ((Player.transform.position.x > (this.transform.position.x + BodyCollider.size.x) && !IsLookingRight)
             || (Player.transform.position.x < (this.transform.position.x - BodyCollider.size.x) && IsLookingRight))

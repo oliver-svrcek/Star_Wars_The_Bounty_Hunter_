@@ -4,16 +4,16 @@ using UnityEngine.Events;
 
 public class CharacterMovementController : MonoBehaviour
 {
-	protected Animator Animator { get; set; }
-	protected Rigidbody2D Rigidbody2D { get; set; }
-	protected CapsuleCollider2D BodyCollider  { get; set; }
-	protected LayerMask WhatIsGround  { get; set; }
-	protected Vector3 velocity;
-	protected bool AirControl  { get; set; }
-	public bool IsGrounded { get; protected set; }
-	protected float JumpForce  { get; set; }
-	protected float MovementSmoothing  { get; set; }
-	protected bool IsLookingRight { get; set; } = true;
+	private Animator Animator { get; set; } = null;
+	private Rigidbody2D Rigidbody2D { get; set; } = null;
+	private CapsuleCollider2D BodyCollider  { get; set; } = null;
+	private LayerMask WhatIsGround { get; set; } = new LayerMask();
+	private Vector3 velocity = Vector3.zero;
+	private bool AirControl { get; set; } = true;
+	public bool IsGrounded { get; private set; } = false;
+	[field: SerializeField] private float JumpForce { get; set; } = 850f;
+	[field: SerializeField] private float MovementSmoothing { get; set; } = 0.01f;
+	private bool IsLookingRight { get; set; } = true;
 
 	[Header("Events")]
 	[Space]
@@ -51,13 +51,6 @@ public class CharacterMovementController : MonoBehaviour
 		}
 		
 		WhatIsGround = LayerMask.GetMask("GameWorldSolid");
-		velocity = Vector3.zero;
-
-		AirControl = true;
-		IsGrounded = false;
-		JumpForce = 850f;
-		MovementSmoothing = 0.01f;
-		IsLookingRight = true;
 
 		if (OnLandEvent == null)
 		{
@@ -148,7 +141,7 @@ public class CharacterMovementController : MonoBehaviour
 		}
 	}
 	
-	protected void Flip()
+	private void Flip()
 	{
 		IsLookingRight = !IsLookingRight;
 		transform.Rotate(0f, 180f, 0f);

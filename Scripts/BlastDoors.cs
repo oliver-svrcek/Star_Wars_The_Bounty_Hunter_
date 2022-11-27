@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class BlastDoors : MonoBehaviour
 {
-    private AudioManagement AudioManagement { get; set; }
-    private Animator Animator { get; set; }
-    private BoxCollider2D BoxCollider2D { get; set; }
-    private EdgeCollider2D EdgeCollider2D { get; set; }
-    private Coroutine OpenCloseRepeatCoroutine { get; set; }
+    private AudioManagement AudioManagement { get; set; } = null;
+    private Animator Animator { get; set; } = null;
+    private BoxCollider2D BoxCollider2D { get; set; } = null;
+    private EdgeCollider2D EdgeCollider2D { get; set; } = null;
+    private Coroutine OpenCloseRepeatCoroutine { get; set; } = null;
     [field: SerializeField] private bool RepeatOpenClose { get; set; } = false;
     [field: SerializeField] private float OpenTime { get; set; } = 5f;
     [field: SerializeField] private float CloseTime { get; set; } = 2f;
@@ -53,14 +53,12 @@ public class BlastDoors : MonoBehaviour
 
     private void Start()
     {
-        OpenCloseRepeatCoroutine = null;
-        
         if (RepeatOpenClose)
         {
             OpenCloseRepeatCoroutine = StartCoroutine(OpenCloseRepeat());
         }
     }
-
+    
     private IEnumerator OpenCloseRepeat()
     {
         while (true)

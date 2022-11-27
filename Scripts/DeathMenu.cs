@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class DeathMenu : MonoBehaviour
 {
-    private FadeManagement FadeManagement { get; set; }
-    private AudioManagement AudioManagement { get; set; }
-    private GameObject PrimaryMenuGameObject { get; set; }
-    private GameObject GameTipGameObject { get; set; }
-    private GameObject RespawnButtonGameObject { get; set; }
-    private GameObject MainMenuButtonGameObject { get; set; }
-    private PauseMenu PauseMenu { get; set; }
-    public Coroutine ActivateCoroutine { get; private set; }
+    private FadeManagement FadeManagement { get; set; } = null;
+    private AudioManagement AudioManagement { get; set; } = null;
+    private GameObject PrimaryMenuGameObject { get; set; } = null;
+    private GameObject GameTipGameObject { get; set; } = null;
+    private GameObject RespawnButtonGameObject { get; set; } = null;
+    private GameObject MainMenuButtonGameObject { get; set; } = null;
+    private PauseMenu PauseMenu { get; set; } = null;
+    public Coroutine ActivateCoroutine { get; private set; } = null;
 
 
     private void Awake()
@@ -119,11 +119,6 @@ public class DeathMenu : MonoBehaviour
                 );
             Application.Quit(1);
         }
-    }
-
-    private void Start()
-    {
-        ActivateCoroutine = null;
     }
 
     public void Activate()

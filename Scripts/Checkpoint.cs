@@ -2,9 +2,9 @@
 
 public class Checkpoint : MonoBehaviour
 {
-    private AudioManagement AudioManagement { get; set; }
-    private BoxCollider2D BoxCollider2D { get; set; }
-    private Animator Animator { get; set; }
+    private AudioManagement AudioManagement { get; set; } = null;
+    private BoxCollider2D BoxCollider2D { get; set; } = null;
+    private Animator Animator { get; set; } = null;
     private void Awake()
     {
         if (ActivePlayer.PlayerData is null)
@@ -59,7 +59,7 @@ public class Checkpoint : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {

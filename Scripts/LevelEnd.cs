@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class LevelEnd : MonoBehaviour
 {
-    private Player Player { get; set; }
-    private FadeManagement FadeManagement { get; set; }
-    private BoxCollider2D BoxCollider2D { get; set; }
+    private Player Player { get; set; } = null;
+    private FadeManagement FadeManagement { get; set; } = null;
+    private BoxCollider2D BoxCollider2D { get; set; } = null;
     private void Awake()
     {
         if (GameObject.Find("Player") is null)
@@ -62,7 +62,7 @@ public class LevelEnd : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {

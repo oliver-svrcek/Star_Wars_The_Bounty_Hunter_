@@ -6,8 +6,8 @@ using Random=UnityEngine.Random;
 
 public class AudioManagement : MonoBehaviour
 {
-    private AudioSource AudioSource { get; set; }
-    private Dictionary<string, AudioClip> AudioClips { get; set; }
+    private AudioSource AudioSource { get; set; } = null;
+    private Dictionary<string, AudioClip> AudioClips { get; set; } = new Dictionary<string, AudioClip>();
     [field: SerializeField] private bool LoadMusic { get; set; } = false;
     [field: SerializeField] private bool LoadSounds { get; set; } = false;
     [field: SerializeField] private bool LoadVoiceLines { get; set; } = false;
@@ -36,8 +36,6 @@ public class AudioManagement : MonoBehaviour
         {
             audioPaths.Add("Audio/VoiceLines");
         }
-        
-        AudioClips = new Dictionary<string, AudioClip>();
 
         foreach (string audioPath in audioPaths)
         {

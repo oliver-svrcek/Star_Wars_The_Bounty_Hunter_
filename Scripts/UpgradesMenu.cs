@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class UpgradesMenu : MonoBehaviour
 {
-    private Player Player { get; set; }
-    private AudioManagement AudioManagement { get; set; }
-    private TextMeshProUGUI CoinCount { get; set; }
-    private GameObject PrimaryMenuGameObject { get; set; }
-    private GameObject PauseMenuGameObject { get; set; }
-    private Dictionary<string, Slider> Sliders { get; set; }
-    private Dictionary<string, Image> SlidersImages { get; set; }
-    private Gradient GearLevelGradient { get; set; }
+    private Player Player { get; set; } = null;
+    private AudioManagement AudioManagement { get; set; } = null;
+    private TextMeshProUGUI CoinCount { get; set; } = null;
+    private GameObject PrimaryMenuGameObject { get; set; } = null;
+    private GameObject PauseMenuGameObject { get; set; } = null;
+    private Dictionary<string, Slider> Sliders { get; set; } = null;
+    private Dictionary<string, Image> SlidersImages { get; set; } = null;
+    private Gradient GearLevelGradient { get; set; } = null;
 
     private void Awake()
     {

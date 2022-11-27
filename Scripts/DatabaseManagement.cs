@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using Mono.Data.Sqlite;
 using JetBrains.Annotations;
 using UnityEngine;
 
 public static class DatabaseManagement
 {
-    private static IDbConnection DbConnection { get; set; }
+    private static IDbConnection DbConnection { get; set; } = null;
 
     public static void InitialiseConnection(string databasePath)
     {

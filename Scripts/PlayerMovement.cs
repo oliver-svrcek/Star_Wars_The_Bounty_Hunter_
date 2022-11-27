@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Jetpack Jetpack { get; private set; }
-    private Animator Animator { get; set; }
-    private CharacterMovementController CharacterMovementController { get; set; }
-    private Rigidbody2D Rigidbody2D { get; set; }
-    private float HorizontalMove { get; set; }
-    private float WalkSpeed { get; set; }
-    private bool Jump { get; set; }
+    public Jetpack Jetpack { get; private set; } = null;
+    private Animator Animator { get; set; } = null;
+    private CharacterMovementController CharacterMovementController { get; set; } = null;
+    private Rigidbody2D Rigidbody2D { get; set; } = null;
+    private float HorizontalMove { get; set; } = 0f;
+    private float WalkSpeed { get; set; } = 30f;
+    private bool Jump { get; set; } = false;
     
     private void Awake()
     {
@@ -62,13 +62,6 @@ public class PlayerMovement : MonoBehaviour
                 );
             Application.Quit(1);
         }
-    }
-
-    private void Start()
-    {
-        Jump = false;
-        HorizontalMove = 0f;
-        WalkSpeed = 30f;
     }
 
     private void Update()

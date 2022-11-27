@@ -4,9 +4,9 @@ using UnityEngine;
 public class CrackingPlatform : MonoBehaviour
 {
     
-    private AudioManagement AudioManagement { get; set; }
-    private Animator Animator { get; set; }
-    private Coroutine DestroyCoroutine { set; get; }
+    private AudioManagement AudioManagement { get; set; } = null;
+    private Animator Animator { get; set; } = null;
+    private Coroutine DestroyCoroutine { set; get; } = null;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class CrackingPlatform : MonoBehaviour
         DestroyCoroutine = null;
     }
     
-    protected void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") && DestroyCoroutine is null)
         {

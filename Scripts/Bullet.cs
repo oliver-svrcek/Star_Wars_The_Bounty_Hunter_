@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Rigidbody2D Rigidbody2D { get; set; }
-    private AudioManagement AudioManagement { get; set; }
-    
-    private string ParentTag { get; set; }
-    private Vector3 ParentPosition { get; set; }
-    private int Damage { get; set; }
-    private float Speed { get; set; }
-    private float SelfDestructDistance { get; set; }
-    private bool Initialized { get; set; }
+    private Rigidbody2D Rigidbody2D { get; set; }  = null;
+    private AudioManagement AudioManagement { get; set; }  = null;
+    private string ParentTag { get; set; } = "";
+    private Vector3 ParentPosition { get; set; } = new Vector3();
+    private int Damage { get; set; } = 0;
+    private float Speed { get; set; } = 20f;
+    private float SelfDestructDistance { get; set; } = 30;
+    private bool Initialized { get; set; } = false;
 
     private void Awake()
     {
@@ -31,14 +30,6 @@ public class Bullet : MonoBehaviour
                 );
             Application.Quit(1);
         }
-        
-        ParentTag = "";
-        ParentPosition = new Vector3();
-        Damage = 0;
-        Speed = 20f;
-        SelfDestructDistance = 30;
-        Initialized = false;
-
     }
 
     private void Start()    

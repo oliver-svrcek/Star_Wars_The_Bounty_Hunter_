@@ -6,10 +6,10 @@ using UnityEngine;
 public class ParallaxEffect : MonoBehaviour
 {
 
-    [field: SerializeField] protected float ParallaxEffectSpeed { get; set; } = 1f;
-    private float Length { get; set; }
-    private float StartPosition { get; set; }
-    public GameObject MainCamera { get; set; }
+    [field: SerializeField] private float ParallaxEffectSpeed { get; set; } = 1f;
+    private float Length { get; set; } = 0f;
+    private float StartPosition { get; set; } = 0f;
+    private GameObject MainCamera { get; set; } = null;
 
     private void Awake()
     {

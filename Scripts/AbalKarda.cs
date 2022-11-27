@@ -4,21 +4,25 @@ using Random=UnityEngine.Random;
 
 public class AbalKarda : EnemyShooter
 {
-    private float BarrageChange { get; set; }
+    [field: SerializeField]  private float BarrageChange { get; set; } = 0.2f;
     
     private new void Start()
     {
         base.Start();
 
-        CanHeal = true;
-        MaximumHealth = 100000;
-        CurrentHealth = MaximumHealth;
-        BulletDamage = 3700;
-        BulletsPerShot = 1;
-        BarrageChange = 0.2f;
-        HealStartTime = 3f;
-        HealPoints = 10;
-        DeathSound = "AbalKardaDeathSound";
+        if (!UseOnlyEditorValues)
+        {
+            CanHeal = true;
+            MaximumHealth = 100000;
+            CurrentHealth = MaximumHealth;
+            BulletDamage = 3700;
+            BulletsPerShot = 1;
+            BulletSpeed = 18f;
+            BarrageChange = 0.2f;
+            HealStartTime = 3f;
+            HealPoints = 10;
+            DeathSound = "AbalKardaDeathSound";
+        }
         
         StartCoroutine(Shoot());
     }

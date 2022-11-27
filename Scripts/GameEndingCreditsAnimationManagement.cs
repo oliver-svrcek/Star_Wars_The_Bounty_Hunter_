@@ -1,7 +1,7 @@
 using UnityEngine;
 public class GameEndingCreditsAnimationManagement : MonoBehaviour
 {
-    private GameEndingCreditsManagement GameEndingCreditsManagement { get; set; }
+    private GameEndingCreditsManagement GameEndingCreditsManagement { get; set; } = null;
 
     private void Awake()
     {

@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 public class BarManagement : MonoBehaviour
 {
-    private Slider Slider { get; set; }
-    private Image Fill { get; set; }
-    private Gradient CurrentGradient { get; set; }
-    private Dictionary<string, Gradient> Gradients { get; set; }
-    private Quaternion FixedRotation { get; set; }
+    private Slider Slider { get; set; } = null;
+    private Image Fill { get; set; } = null;
+    private Gradient CurrentGradient { get; set; } = null;
+    private Dictionary<string, Gradient> Gradients { get; set; } = new Dictionary<string, Gradient>();
+    private Quaternion FixedRotation { get; set; } = new Quaternion();
     
     private void Awake()
     {
@@ -38,7 +38,6 @@ public class BarManagement : MonoBehaviour
             Application.Quit(1);
         }
         
-        Gradients = new Dictionary<string, Gradient>();
         FixedRotation = transform.rotation;
         
         CreateGradients();

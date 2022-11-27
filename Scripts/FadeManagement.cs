@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class FadeManagement : MonoBehaviour
 {
-    private PauseMenu PauseMenu { get; set; }
-    private string SceneToLoad { get; set; }
-    private Image Image { get; set; }
-    private Animator Animator { get; set; }
+    private PauseMenu PauseMenu { get; set; } = null;
+    private string SceneToLoad { get; set; } = "";
+    private Image Image { get; set; } = null;
+    private Animator Animator { get; set; } = null;
 
     private void Awake()
     {

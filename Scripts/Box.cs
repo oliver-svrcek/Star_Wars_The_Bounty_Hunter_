@@ -2,9 +2,9 @@
 
 public class Box : MonoBehaviour
 {
-    private AudioManagement AudioManagement { get; set; }
-    private GameObject CoinGameObject { get; set; }
-    private GameObject LevelEndGameObject { get; set; }
+    private AudioManagement AudioManagement { get; set; } = null;
+    private GameObject CoinGameObject { get; set; } = null;
+    private GameObject LevelEndGameObject { get; set; } = null;
 
     private void Awake()
     {

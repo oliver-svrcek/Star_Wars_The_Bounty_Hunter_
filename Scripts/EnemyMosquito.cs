@@ -1,11 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class EnemyMosquito : EnemyFlyer
 {
-    protected new void Start()
+    private new void Start()
     {
         base.Start();
 
@@ -14,7 +11,7 @@ public class EnemyMosquito : EnemyFlyer
             CanHeal = false;
             MaximumHealth = 1;
             CurrentHealth = MaximumHealth;
-            Damage = Int32.MaxValue;
+            Damage = int.MaxValue;
             DeathSound = "MosquitoDeathSound";
         }
     }

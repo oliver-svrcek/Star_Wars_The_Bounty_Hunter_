@@ -1,6 +1,6 @@
 public class EnemyJawa: EnemyChaser
 {
-    protected new void Start()
+    private new void Start()
     {
         base.Start();
 

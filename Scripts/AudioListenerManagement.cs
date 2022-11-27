@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AudioListenerManagement : MonoBehaviour
 {
-    private Quaternion FixedRotation { get; set; }
+    private Quaternion FixedRotation { get; set; } = new Quaternion();
     
     private void Awake()
     {

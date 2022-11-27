@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class Flamethrower : MonoBehaviour
 {
-    private Animator Animator { get; set; }
-    private AudioManagement AudioManagement { get; set; }
-    private PlayerWeapons PlayerWeapons { get; set; }
-    private PlayerMovement PlayerMovement { get; set; }
-    private CharacterMovementController CharacterMovementController { get; set; }
-    private BarManagement FlamethrowerHeatBar { get; set; }
-    private ParticleSystem ParticleSystem { get; set; }
-    private BoxCollider2D BoxCollider2D { get; set; }
-    public Coroutine FlameCoroutine { get; private set; }
-    public Coroutine CoolingCoroutine { get; private set; }
-    public float ParticleStartLifetime { get; set; }
-    public int MaximumFlamethrowerHeat { get; set; }
-    public int CurrentFlamethrowerHeat  { get; set; }
-    public int FlamethrowerHeatPoints { get; set; }
-    public int FlamethrowerOverheatCoolingPoints { get; set; }
-    public float FlameRange { get; set; }
-    public int FlamethrowerDamage { get; set; }
-    private List<Enemy> EnemiesInRange { get; set; }
-
+    private Animator Animator { get; set; } = null;
+    private AudioManagement AudioManagement { get; set; } = null;
+    private PlayerWeapons PlayerWeapons { get; set; } = null;
+    private PlayerMovement PlayerMovement { get; set; } = null;
+    private CharacterMovementController CharacterMovementController { get; set; } = null;
+    private BarManagement FlamethrowerHeatBar { get; set; } = null;
+    private ParticleSystem ParticleSystem { get; set; } = null;
+    private BoxCollider2D BoxCollider2D { get; set; } = null;
+    private Coroutine FlameCoroutine { get; set; } = null;
+    private Coroutine CoolingCoroutine { get; set; } = null;
+    public float ParticleStartLifetime { get; set; } = 0.25f;
+    private int MaximumFlamethrowerHeat { get; set; } = 100000;
+    private int CurrentFlamethrowerHeat { get; set; } = 0;
+    private int FlamethrowerHeatPoints { get; set; } = 500;
+    public int FlamethrowerOverheatCoolingPoints { get; set; } = 50;
+    public float FlameRange { get; set; } = 2.75f;
+    public int FlamethrowerDamage { get; set; } = 11000;
+    private List<Enemy> EnemiesInRange { get; set; } = new List<Enemy>();
+    
     private void Awake()
     {
         if (GameObject.Find("Player") is null)
@@ -125,18 +125,6 @@ public class Flamethrower : MonoBehaviour
                 );
             Application.Quit(1);
         }
-        
-        ParticleStartLifetime = 0.25f;
-        MaximumFlamethrowerHeat = 100000;
-        CurrentFlamethrowerHeat = 0;
-        FlamethrowerHeatPoints = 500;
-        FlamethrowerOverheatCoolingPoints = 50;
-        FlameRange = 2.75f;
-        FlamethrowerDamage = 11000;
-
-        FlameCoroutine = null;
-        CoolingCoroutine = null;
-        EnemiesInRange = new List<Enemy>();
     }
 
     private void Start()

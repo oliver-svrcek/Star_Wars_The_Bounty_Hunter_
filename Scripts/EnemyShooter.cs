@@ -48,7 +48,7 @@ public abstract class EnemyShooter : Enemy
         DetectPlayer();
     }
 
-    protected void DetectPlayer()
+    private void DetectPlayer()
     {
         float horizontalDistance = Player.transform.position.x - this.transform.position.x;
         float verticalDistance = Player.transform.position.y - this.transform.position.y;
@@ -74,7 +74,7 @@ public abstract class EnemyShooter : Enemy
         }
     }
 
-    protected IEnumerator Shoot()
+    private IEnumerator Shoot()
     {
         while (true)
         {
