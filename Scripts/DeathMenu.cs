@@ -6,10 +6,13 @@ public class DeathMenu : MonoBehaviour
 {
     private FadeManagement FadeManagement { get; set; } = null;
     private AudioManagement AudioManagement { get; set; } = null;
+    private AudioManagement MusicAudioManagement { get; set; } = null;
     private GameObject PrimaryMenuGameObject { get; set; } = null;
     private GameObject GameTipGameObject { get; set; } = null;
     private GameObject RespawnButtonGameObject { get; set; } = null;
     private GameObject MainMenuButtonGameObject { get; set; } = null;
+    private GameObject RespawnTimerGameObject { get; set; } = null;
+    private BarManagement RespawnTimerBar { get; set; } = null;
     private PauseMenu PauseMenu { get; set; } = null;
     public Coroutine ActivateCoroutine { get; private set; } = null;
 
@@ -44,15 +47,33 @@ public class DeathMenu : MonoBehaviour
                 );
             Application.Quit(1);
         }
-
         if ((AudioManagement = GameObject.Find(
                 "Interface/MainCamera/Audio/Sounds"
-                ).GetComponent<AudioManagement>()) is null)
+            ).GetComponent<AudioManagement>()) is null)
         {
             Debug.LogError(
                 "ERROR: <DeathMenu> - Interface/MainCamera/Audio/Sounds game object is missing " +
                 "AudioManagement component."
                 );
+            Application.Quit(1);
+        }
+        
+        if (GameObject.Find("Interface/MainCamera/Audio/Music") is null)
+        {
+            Debug.LogError(
+                "ERROR: <DeathMenu> - Interface/MainCamera/Audio/Music game object was not found in game" +
+                " object hierarchy."
+            );
+            Application.Quit(1);
+        }
+        if ((MusicAudioManagement = GameObject.Find(
+                "Interface/MainCamera/Audio/Music"
+            ).GetComponent<AudioManagement>()) is null)
+        {
+            Debug.LogError(
+                "ERROR: <DeathMenu> - Interface/MainCamera/Audio/Music game object is missing " +
+                "FadeManagement component."
+            );
             Application.Quit(1);
         }
         
@@ -119,7 +140,38 @@ public class DeathMenu : MonoBehaviour
                 );
             Application.Quit(1);
         }
+        
+        if ((RespawnTimerGameObject = GameObject.Find(
+                "Interface/MainCamera/UICanvas/DeathMenu/PrimaryMenu/RespawnTimerBar"
+            )) is null)
+        {
+            Debug.LogError(
+                "ERROR: <DeathMenu> - Interface/MainCamera/UICanvas/DeathMenu/PrimaryMenu/RespawnTimerBar" +
+                " game object was not found in game object hierarchy."
+            );
+            Application.Quit(1);
+        }
+        
+        if ((RespawnTimerBar = GameObject.Find(
+                "Interface/MainCamera/UICanvas/DeathMenu/PrimaryMenu/RespawnTimerBar/Slider"
+            ).GetComponent<BarManagement>()) is null)
+        {
+            Debug.LogError(
+                "ERROR: <DeathMenu> - game object Interface/MainCamera/UICanvas/DeathMenu/PrimaryMenu/" +
+                "RespawnTimerBar/Slider is missing BarManagement component."
+            );
+            Application.Quit(1);
+        }
     }
+
+    // private void Start()
+    // {
+    //     PrimaryMenuGameObject.SetActive(true);
+    //     RespawnTimerBar.SetMaxValue(1f);
+    //     RespawnTimerBar.SetValue(1f);
+    //     RespawnTimerBar.SetGradient("Recharging");
+    //     PrimaryMenuGameObject.SetActive(false);
+    // }
 
     public void Activate()
     {
@@ -134,21 +186,37 @@ public class DeathMenu : MonoBehaviour
         PauseMenu.Resume();
         PauseMenu.SetCanPause(false);
         ActivePlayer.PlayerData.LoadData();
-        
+
         yield return new WaitForSecondsRealtime(0.5f);
         
         Time.timeScale = 0f;
         MainAudioManagement.StopAll();
+        MusicAudioManagement.Play("PlayerDeathMusic", false);
         Cursor.visible = true;
+        
         PrimaryMenuGameObject.SetActive(true);
-
-        yield return new WaitForSecondsRealtime(0.5f);
+        RespawnTimerBar.SetMaxValue(1f);
+        RespawnTimerBar.SetValue(1f);
+        RespawnTimerBar.SetGradient("Recharging");
+        StartCoroutine(RespawnCountdown());
 
         yield return new WaitForSecondsRealtime(5f);
 
         GameTipGameObject.SetActive(false);
+        RespawnTimerGameObject.SetActive(false);
         RespawnButtonGameObject.SetActive(true);
         MainMenuButtonGameObject.SetActive(true);
+    }
+    
+    private IEnumerator RespawnCountdown()
+    {
+        while (RespawnTimerBar.GetValue() > 0f)
+        {
+            yield return new WaitForSecondsRealtime(0.01f);
+            RespawnTimerBar.SetValue(((float) RespawnTimerBar.GetValue() - 0.0032f));
+        }
+        
+        RespawnTimerBar.SetValue(0f);
     }
 
     public void Respawn()

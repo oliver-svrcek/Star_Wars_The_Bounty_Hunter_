@@ -164,22 +164,29 @@ public class Player : MonoBehaviour
                 "ArmorLevel", "BlasterLevel", "JetpackLevel", "FlamethrowerLevel"
             }));
 
-        PlayerData playerData = new PlayerData("DEV");
-        if (!DatabaseManagement.EntryExists("PlayerData", playerData.Name))
+        PlayerData devPlayerData = new PlayerData("DEV_");
+
+        if (!DatabaseManagement.EntryExists("PlayerData", devPlayerData.Name))
         {
-            playerData.SaveNewData();
+            devPlayerData.SaveNewData();
+        }
+        
+        devPlayerData.LoadData();
+        if (devPlayerData.SceneBuildIndex == SceneManager.GetActiveScene().buildIndex)
+        {
+            devPlayerData.ResetData();
+            devPlayerData.PositionAxisX = this.transform.position.x;
+            devPlayerData.PositionAxisY = this.transform.position.y;
         }
         else
         {
-            playerData.ResetData();
+            devPlayerData.ResetData();
         }
-        
-        ActivePlayer.PlayerData = playerData;
-        ActivePlayer.PlayerData.CoinCount = 99;
-        ActivePlayer.PlayerData.PositionAxisX = 0;
-        ActivePlayer.PlayerData.PositionAxisY = 0;
-        ActivePlayer.PlayerData.SceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
-        ActivePlayer.PlayerData.UpdateData();
+
+        devPlayerData.CoinCount = 99;
+        devPlayerData.SceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
+        devPlayerData.UpdateData();
+        ActivePlayer.PlayerData = devPlayerData;
     }
     
     private void Start()
@@ -426,6 +433,7 @@ public class Player : MonoBehaviour
             PlayerMovement.SetFreeze(true);
             PlayerMovement.enabled = false;
             PlayerWeapons.enabled = false;
+            Rigidbody2D.bodyType = RigidbodyType2D.Static;
             BodyCollider.enabled = false;
             Animator.enabled = false;
             if (BleedCoroutine is not null)

@@ -6,8 +6,8 @@ public abstract class EnemyShooter : Enemy
 {
     private Transform Firepoint { get; set; } = null;
     private GameObject BulletPrefab { get; set; } = null;
-    private Coroutine ShootCoroutine { get; set; } = null;
-    private Coroutine ShootStartDelayCoroutine { get; set; } = null;
+    protected Coroutine ShootCoroutine { get; set; } = null;
+    protected Coroutine ShootStartDelayCoroutine { get; set; } = null;
     [field: SerializeField] protected float ShootingRate { get; set; } = 1f;
     [field: SerializeField] protected int BulletsPerShot { get; set; } = 1;
     [field: SerializeField] protected int BulletDamage { get; set; } = 0;
@@ -74,7 +74,7 @@ public abstract class EnemyShooter : Enemy
         }
     }
 
-    private IEnumerator Shoot()
+    protected IEnumerator Shoot()
     {
         while (true)
         {

@@ -126,6 +126,11 @@ public class BarManagement : MonoBehaviour
         Slider.maxValue = value;
         Fill.color = CurrentGradient.Evaluate(1f);
     }
+    
+    public float GetMaxValue()
+    {
+        return Slider.maxValue;
+    }
 
     public void SetValue(float value)
     {
@@ -133,6 +138,11 @@ public class BarManagement : MonoBehaviour
         Fill.color = CurrentGradient.Evaluate(Slider.normalizedValue);
     }
 
+    public float GetValue()
+    {
+        return Slider.value;
+    }
+    
     public void SetGradient(string gradientName)
     {
         Gradient gradient;

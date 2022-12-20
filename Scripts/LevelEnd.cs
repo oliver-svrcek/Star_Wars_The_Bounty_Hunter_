@@ -7,6 +7,7 @@ public class LevelEnd : MonoBehaviour
     private Player Player { get; set; } = null;
     private FadeManagement FadeManagement { get; set; } = null;
     private BoxCollider2D BoxCollider2D { get; set; } = null;
+    private AudioManagement MusicAudioManagement { get; set; } = null;
     private void Awake()
     {
         if (GameObject.Find("Player") is null)
@@ -51,6 +52,25 @@ public class LevelEnd : MonoBehaviour
                 );
             Application.Quit(1);
         }
+        
+        if (GameObject.Find("Interface/MainCamera/Audio/Music") is null)
+        {
+            Debug.LogError(
+                "ERROR: <LevelEnd> - Interface/MainCamera/Audio/Music game object was not found in game" +
+                " object hierarchy."
+            );
+            Application.Quit(1);
+        }
+        if ((MusicAudioManagement = GameObject.Find(
+                "Interface/MainCamera/Audio/Music"
+            ).GetComponent<AudioManagement>()) is null)
+        {
+            Debug.LogError(
+                "ERROR: <LevelEnd> - Interface/MainCamera/Audio/Music game object is missing " +
+                "FadeManagement component."
+            );
+            Application.Quit(1);
+        }
     }
 
     private void Start()
@@ -66,6 +86,8 @@ public class LevelEnd : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            MusicAudioManagement.Stop();
+            MusicAudioManagement.Play("LevelEndMusic", false);
             Player.ReloadGearValues();
             Player.PlayerData.SceneBuildIndex += 1;
             Player.PlayerData.PositionAxisX = 0;

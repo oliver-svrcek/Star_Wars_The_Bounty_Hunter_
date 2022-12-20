@@ -8,6 +8,7 @@ public class AudioManagement : MonoBehaviour
 {
     private AudioSource AudioSource { get; set; } = null;
     private Dictionary<string, AudioClip> AudioClips { get; set; } = new Dictionary<string, AudioClip>();
+    private Coroutine PlaySequenceCoroutine { get; set; } = null;
     [field: SerializeField] private bool LoadMusic { get; set; } = false;
     [field: SerializeField] private bool LoadSounds { get; set; } = false;
     [field: SerializeField] private bool LoadVoiceLines { get; set; } = false;
@@ -82,6 +83,12 @@ public class AudioManagement : MonoBehaviour
 
     public void Stop()
     {
+        if (PlaySequenceCoroutine is not null)
+        {
+            StopCoroutine(PlaySequenceCoroutine);
+            PlaySequenceCoroutine = null;
+        }
+        
         AudioSource.Stop();
     }
 
@@ -222,10 +229,16 @@ public class AudioManagement : MonoBehaviour
             return;
         }
         
-        StartCoroutine(PlaySequenceCoroutine(audioClipsSequence, loopLast));
+        
+        if (PlaySequenceCoroutine is not null)
+        {
+            StopCoroutine(PlaySequenceCoroutine);
+            PlaySequenceCoroutine = null;
+        }     
+        PlaySequenceCoroutine =  StartCoroutine(PlaySequenceCor(audioClipsSequence, loopLast));
     }
 
-    private IEnumerator PlaySequenceCoroutine(string[] audioClipsSequence, bool loopLast)
+    private IEnumerator PlaySequenceCor(string[] audioClipsSequence, bool loopLast)
     {
         for (int index = 0; index < audioClipsSequence.Length; index++)
         {

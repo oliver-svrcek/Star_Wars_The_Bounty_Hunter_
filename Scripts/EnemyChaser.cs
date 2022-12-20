@@ -13,7 +13,7 @@ public abstract class EnemyChaser : Enemy
     private float HorizontalMove { get; set; } = 0f;
     private bool Jump { get; set; } = false;
     [field: SerializeField] protected float ViewRangeHorizontal { get; set; } = 11f;
-    [field: SerializeField] protected float ViewRangeVertical { get; set; } = 4f;
+    [field: SerializeField] protected float ViewRangeVertical { get; set; } = 7f;
     [field: SerializeField] protected int Damage { get; set; } = 0;
     [field: SerializeField] protected float Speed { get; set; } = 30f;
 
@@ -103,7 +103,7 @@ public abstract class EnemyChaser : Enemy
             }
 
             // Jump if player jumps over enemy.
-            if (Math.Abs(horizontalDistance) < 1.5f && verticalDistance < 2f)
+            if (Math.Abs(horizontalDistance) < 1.5f && Math.Abs(verticalDistance) < 2f)
             {
                 if (PlayerRigidbody2D.velocity.y > 0.1f &&
                     ((Rigidbody2D.velocity.x < 0 && PlayerRigidbody2D.velocity.x > 0) ||

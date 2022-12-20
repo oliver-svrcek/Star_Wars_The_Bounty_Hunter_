@@ -12,8 +12,8 @@ public abstract class EnemyWalker : Enemy
     private CharacterMovementController CharacterMovementController { get; set; } = null;
     private float HorizontalMove { get; set; } = 0f;
     private bool Jump { get; set; } = false;
-    protected int Damage { get; set; } = 0;
-    protected float Speed { get; set; } = 30f;
+    [field: SerializeField] protected int Damage { get; set; } = 0;
+    [field: SerializeField] protected float Speed { get; set; } = 30f;
     
     protected new void Awake()
     {

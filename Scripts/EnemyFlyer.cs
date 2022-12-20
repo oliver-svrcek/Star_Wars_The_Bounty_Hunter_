@@ -42,6 +42,7 @@ public abstract class EnemyFlyer : Enemy
 
         AIDestinationSetter.target = Player.transform;
         AIPath.canMove = false;
+        AIPath.enabled = false;
     }
 
     
@@ -55,11 +56,13 @@ public abstract class EnemyFlyer : Enemy
         if (Math.Abs(horizontalDistance) < ViewRangeHorizontal &&
             Math.Abs(verticalDistance) < ViewRangeVertical)
         {
+            AIPath.enabled = true;
             AIPath.canMove = true;
         }
         else
         {
             AIPath.canMove = false;
+            AIPath.enabled = false;
         }
     }
 

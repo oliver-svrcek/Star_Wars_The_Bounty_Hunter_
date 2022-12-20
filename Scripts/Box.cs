@@ -13,15 +13,10 @@ public class Box : MonoBehaviour
             Debug.LogError("ERROR: <Box> - Box game object is missing AudioManagement component.");
             Application.Quit(1);
         }
-
-        if (GameObject.Find("Coin (1)") is null)
-        {
-            Debug.LogError("ERROR: <Box> - Coin (1) game object was not found in the game object hierarchy.");
-            Application.Quit(1);
-        }
+        
         if ((CoinGameObject = GameObject.Find("Coin (1)")) is null)
         {
-            Debug.LogError("ERROR: <Box> - Coin (1) game object is missing Coin component.");
+            Debug.LogError("ERROR: <Box> - Coin (1) game object was not found in the game object hierarchy.");
             Application.Quit(1);
         }
         

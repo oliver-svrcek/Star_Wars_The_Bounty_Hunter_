@@ -100,11 +100,11 @@ public class PlayerMovement : MonoBehaviour
         if (freeze)
         {
             Rigidbody2D.velocity = Vector2.zero;
-            Rigidbody2D.bodyType = RigidbodyType2D.Static;
+            Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         }
         else
         {
-            Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+            Rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public abstract class Enemy : MonoBehaviour
     [field: SerializeField] protected string DeathSound { get; set; } = "GenericDeathSound";
     [field: SerializeField] protected bool CanHeal { get; set; } = false;
     private bool IsLookingRight { get; set; } = true;
+    
+    [Header("Events")]
+    [Space]
+    public UnityEvent OnDeathEvent;
+    [System.Serializable]
+    public class BoolEvent : UnityEvent<bool> { }
 
     protected void Awake()
     {
@@ -131,6 +138,11 @@ public abstract class Enemy : MonoBehaviour
                 Application.Quit(1);
             }
         }
+        
+        if (OnDeathEvent == null)
+        {
+            OnDeathEvent = new UnityEvent();	
+        }
     }
 
     protected void Start()
@@ -201,6 +213,7 @@ public abstract class Enemy : MonoBehaviour
                 HealthBarGameObject.SetActive(false);
             }
             
+            OnDeathEvent.Invoke();
             Destroy(this.gameObject);
         }
         else if (CanHeal)

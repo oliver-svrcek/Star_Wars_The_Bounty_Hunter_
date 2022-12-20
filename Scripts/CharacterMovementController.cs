@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,7 +8,7 @@ public class CharacterMovementController : MonoBehaviour
 	private Animator Animator { get; set; } = null;
 	private Rigidbody2D Rigidbody2D { get; set; } = null;
 	private CapsuleCollider2D BodyCollider  { get; set; } = null;
-	private LayerMask WhatIsGround { get; set; } = new LayerMask();
+	private List<LayerMask> GroundLayerMasks { get; set; } = new List<LayerMask>();
 	private Vector3 velocity = Vector3.zero;
 	private bool AirControl { get; set; } = true;
 	public bool IsGrounded { get; private set; } = false;
@@ -49,8 +50,9 @@ public class CharacterMovementController : MonoBehaviour
 				);
 			Application.Quit(1);
 		}
-		
-		WhatIsGround = LayerMask.GetMask("GameWorldSolid");
+
+		GroundLayerMasks.Add(LayerMask.GetMask("Tilemap"));
+		GroundLayerMasks.Add(LayerMask.GetMask("GameWorldSolid"));
 
 		if (OnLandEvent == null)
 		{
@@ -63,15 +65,21 @@ public class CharacterMovementController : MonoBehaviour
 		bool wasGrounded = IsGrounded;
 		IsGrounded = false;
 
-		Collider2D[] colliders = Physics2D.OverlapCapsuleAll(
-			new Vector2(BodyCollider.bounds.center.x, BodyCollider.bounds.center.y - 0.1f), 
-			new Vector2(BodyCollider.size.x - 0.4f, BodyCollider.size.y), 
-			BodyCollider.direction, 0f, WhatIsGround
-			);
-
-		for (int i = 0; i < colliders.Length; i++)
+		List<Collider2D> colliders = new List<Collider2D>();
+		foreach (LayerMask GroundLayerMask in GroundLayerMasks)
 		{
-			if (colliders[i].gameObject != gameObject)
+			Collider2D[] cols = Physics2D.OverlapCapsuleAll(
+				new Vector2(BodyCollider.bounds.center.x, BodyCollider.bounds.center.y - 0.1f), 
+				new Vector2(BodyCollider.size.x - 0.4f, BodyCollider.size.y), 
+				BodyCollider.direction, 0f, GroundLayerMask
+			);
+			
+			colliders.AddRange(cols);
+		}
+
+		foreach (Collider2D collider in colliders)
+		{
+			if (collider.gameObject != gameObject)
 			{
 				IsGrounded = true;
 				

@@ -9,13 +9,19 @@ public class BabyYoda : MonoBehaviour
     private AIDestinationSetter AIDestinationSetter { get; set; } = null;
     private Player Player { get; set; } = null;
     private AudioManagement AudioManagement { get; set; } = null;
+    private AudioManagement MusicAudioManagement { get; set; } = null;
     private Animator Animator { get; set; } = null;
     private CapsuleCollider2D BodyCollider { get; set; } = null;
-    public Coroutine ShootCoroutine { get; private set; } = null;
-    private int Damage { get; set; } = 420000;
+    private Transform Firepoint { get; set; } = null;
+    private GameObject BulletPrefab { get; set; } = null;
+    private Coroutine ShootCoroutine { get; set; } = null;
+    private float ShootingRate { get; set; } = 0.05f;
     private bool Discovered { get; set; } = false;
     private bool Activated { get; set; } = false;
     private bool IsLookingRight { get; set; } = true;
+    private string BulletSound { get; set; } = "PlayerBlasterShotSound";
+    [field: SerializeField] private int BulletDamage { get; set; } = 240000;
+    [field: SerializeField] private float BulletSpeed { get; set; } = 20f;
     
     private void Awake()
     {
@@ -57,6 +63,25 @@ public class BabyYoda : MonoBehaviour
             Application.Quit(1);
         }
         
+        if (GameObject.Find("Interface/MainCamera/Audio/Music") is null)
+        {
+            Debug.LogError(
+                "ERROR: <BabyYoda> - Interface/MainCamera/Audio/Music game object was not found in game" +
+                " object hierarchy."
+            );
+            Application.Quit(1);
+        }
+        if ((MusicAudioManagement = GameObject.Find(
+                "Interface/MainCamera/Audio/Music"
+            ).GetComponent<AudioManagement>()) is null)
+        {
+            Debug.LogError(
+                "ERROR: <BabyYoda> - Interface/MainCamera/Audio/Music game object is missing " +
+                "FadeManagement component."
+            );
+            Application.Quit(1);
+        }
+        
         if ((Animator = this.gameObject.GetComponent<Animator>()) is null)
         {
             Debug.LogError(
@@ -74,12 +99,28 @@ public class BabyYoda : MonoBehaviour
             );
             Application.Quit(1);
         }
+        
+        if ((Firepoint = this.gameObject.transform.Find("Firepoint")) is null)
+        {
+            Debug.LogError(
+                "ERROR: <BabyYoda> - " + this.gameObject.transform.name + "/Firepoint game object was " +
+                "not found in game object hierarchy."
+            );
+            Application.Quit(1);
+        }
+
+        if ((BulletPrefab = Resources.Load("Prefabs/Objects/Bullet") as GameObject) is null)
+        {
+            Debug.LogError("ERROR: <BabyYoda> - Prefabs/Objects/Bullet resource was not loaded.");
+            Application.Quit(1);
+        }
     }
 
     private void Start()
     {
         AIDestinationSetter.target = Player.transform;
         AIPath.canMove = false;
+        AIPath.enabled = false;
     }
     
     private void Update()
@@ -89,11 +130,12 @@ public class BabyYoda : MonoBehaviour
         float horizontalDistance = Player.transform.position.x - this.transform.position.x;
         float verticalDistance = Player.transform.position.y - this.transform.position.y;
 
-        if (Math.Abs(horizontalDistance) < 10 &&
+        if (Math.Abs(horizontalDistance) < 8 &&
             Math.Abs(verticalDistance) < 3 &&
             !Discovered)
         {
-            AudioManagement.Play("BabyYodaDiscoveryMusic", false);
+            MusicAudioManagement.Stop();
+            MusicAudioManagement.PlaySequence(new [] {"BabyYodaDiscoveryMusic", "LevelMusic"} ,true);
             Discovered = true;
         }
         
@@ -102,8 +144,21 @@ public class BabyYoda : MonoBehaviour
             !Activated && Input.GetKeyDown(KeyCode.E))
         {
             AudioManagement.PlayOneShot("CoinSpawnSound");
+            AIPath.enabled = true;
             AIPath.canMove = true;
             Activated = true;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.B) && Activated && ShootCoroutine is null)
+        {
+            Animator.SetBool("IsShooting", true);
+            ShootCoroutine = StartCoroutine(Shoot());
+        }
+        else if (Input.GetKeyUp(KeyCode.B) && Activated && ShootCoroutine is not null)
+        {
+            Animator.SetBool("IsShooting", false);
+            StopCoroutine(ShootCoroutine);
+            ShootCoroutine = null;
         }
     }
     
@@ -115,5 +170,23 @@ public class BabyYoda : MonoBehaviour
             transform.Rotate(0f, 180f, 0f);
             IsLookingRight = !IsLookingRight;
         }
+    }
+    
+    private IEnumerator Shoot()
+    {
+        while (true)
+        {
+            SpawnBullet();
+            yield return new WaitForSeconds(ShootingRate);
+        }
+    }
+    
+
+    protected void SpawnBullet()
+    {
+        GameObject bullet = Instantiate(BulletPrefab, Firepoint.position, Firepoint.rotation);
+        bullet.GetComponent<Bullet>().Initialize(this.gameObject, BulletDamage, BulletSpeed);
+        
+        AudioManagement.PlayOneShot(BulletSound);
     }
 }

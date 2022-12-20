@@ -82,9 +82,9 @@ public class Bullet : MonoBehaviour
             return;
         }
         
-        if (ParentTag == "Player")
+        if (ParentTag == "Player" || ParentTag == "Friendly")
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Friendly"))
             {
                 return;
             }
