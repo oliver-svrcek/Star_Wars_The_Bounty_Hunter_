@@ -12,8 +12,8 @@ public class Flamethrower : MonoBehaviour
     private BarManagement FlamethrowerHeatBar { get; set; } = null;
     private ParticleSystem ParticleSystem { get; set; } = null;
     private BoxCollider2D BoxCollider2D { get; set; } = null;
-    private Coroutine FlameCoroutine { get; set; } = null;
-    private Coroutine CoolingCoroutine { get; set; } = null;
+    public Coroutine FlameCoroutine { get; private set; } = null;
+    public Coroutine CoolingCoroutine { get; private set; } = null;
     public float ParticleStartLifetime { get; set; } = 0.25f;
     private int MaximumFlamethrowerHeat { get; set; } = 100000;
     private int CurrentFlamethrowerHeat { get; set; } = 0;

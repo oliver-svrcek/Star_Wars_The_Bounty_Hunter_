@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     private PauseMenu PauseMenu { get; set; } = null;
     private DeathMenu DeathMenu { get; set; } = null;
     private BarManagement HealthBar { get; set; } = null;
-    private Coroutine HealCoroutine { get; set; } = null;
+    public Coroutine HealCoroutine { get; private set; } = null;
     private Coroutine BleedCoroutine { get; set; } = null;
     private int MaximumHealth { get; set; } = 10000;
     private int CurrentHealth { get; set; } = 0;
@@ -219,7 +219,26 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ReloadGearValues()
+    public void ReloadGearValue(string gearName)
+    {
+        switch (gearName)
+        {
+            case "armor":
+                SetArmorValues();
+                break;
+            case "blaster":
+                SetBlasterValues();
+                break;
+            case "jetpack":
+                SetJetpackValues();
+                break;
+            case "flamethrower":
+                SetFlamethrowerValues();
+                break;
+        }
+    }
+
+    private void ReloadGearValues()
     {
         SetArmorValues();
         SetBlasterValues();

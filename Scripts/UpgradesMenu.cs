@@ -8,6 +8,9 @@ public class UpgradesMenu : MonoBehaviour
     private Player Player { get; set; } = null;
     private AudioManagement AudioManagement { get; set; } = null;
     private TextMeshProUGUI CoinCount { get; set; } = null;
+    private Blaster Blaster { get; set; } = null;
+    private Jetpack Jetpack { get; set; } = null;
+    private Flamethrower Flamethrower { get; set; } = null;
     private GameObject PrimaryMenuGameObject { get; set; } = null;
     private GameObject PauseMenuGameObject { get; set; } = null;
     private Dictionary<string, Slider> Sliders { get; set; } = null;
@@ -70,6 +73,52 @@ public class UpgradesMenu : MonoBehaviour
                 "ERROR: <UpgradesMenu> - Interface/MainCamera/UICanvas/PauseMenu/UpgradesMenu/PrimaryMenu/" +
                 "CoinsCount/Text (TMP) game object is missing TextMeshProUGUI component."
                 );
+            Application.Quit(1);
+        }
+        
+        if (GameObject.Find("Player/Blaster") is null)
+        {
+            Debug.LogError(
+                "ERROR: <UpgradesMenu> - Player/Blaster game object was not found in the game object hierarchy."
+            );
+            Application.Quit(1);
+        }
+        if ((Blaster = GameObject.Find("Player/Blaster").GetComponent<Blaster>()) is null)
+        {
+            Debug.LogError(
+                "ERROR: <UpgradesMenu> - Player/Blaster game object is missing Blaster component."
+            );
+            Application.Quit(1);
+        }
+        
+        if (GameObject.Find("Player/Jetpack") is null)
+        {
+            Debug.LogError(
+                "ERROR: <UpgradesMenu> - Player/Jetpack game object was not found in the game object hierarchy."
+            );
+            Application.Quit(1);
+        }
+        if ((Jetpack = GameObject.Find("Player/Jetpack").GetComponent<Jetpack>()) is null)
+        {
+            Debug.LogError(
+                "ERROR: <UpgradesMenu> - Player/Jetpack game object is missing Jetpack component."
+            );
+            Application.Quit(1);
+        }
+        
+        if (GameObject.Find("Player/Flamethrower") is null)
+        {
+            Debug.LogError(
+                "ERROR: <UpgradesMenu> - Player/Flamethrower game object was not found in the game object " +
+                "hierarchy."
+            );
+            Application.Quit(1);
+        }
+        if ((Flamethrower = GameObject.Find("Player/Flamethrower").GetComponent<Flamethrower>()) is null)
+        {
+            Debug.LogError(
+                "ERROR: <UpgradesMenu> - Player/Flamethrower game object is missing Flamethrower component."
+            );
             Application.Quit(1);
         }
         
@@ -400,7 +449,7 @@ public class UpgradesMenu : MonoBehaviour
         
         if (gearName == "armor")
         {
-            if (Player.PlayerData.ArmorLevel == 4)
+            if (Player.HealCoroutine is not null || Player.PlayerData.ArmorLevel == 4)
             {
                 AudioManagement.PlayOneShot("ErrorSound");
                 return;
@@ -409,10 +458,13 @@ public class UpgradesMenu : MonoBehaviour
             Player.PlayerData.ArmorLevel += 1;
             Sliders["armor"].value += 1;
             SlidersImages["armor"].color = GearLevelGradient.Evaluate(Sliders["armor"].normalizedValue);
+            
+            Player.ReloadGearValue("armor");
         }
         else if (gearName == "blaster")
         {
-            if (Player.PlayerData.BlasterLevel == 4)
+            if (Blaster.ShootCoroutine is not null || Blaster.CoolingCoroutine is not null || 
+                Blaster.OverheatCoroutine is not null || Player.PlayerData.BlasterLevel == 4)
             {
                 AudioManagement.PlayOneShot("ErrorSound");
                 return;
@@ -421,10 +473,13 @@ public class UpgradesMenu : MonoBehaviour
             Player.PlayerData.BlasterLevel += 1;
             Sliders["blaster"].value += 1;
             SlidersImages["blaster"].color = GearLevelGradient.Evaluate(Sliders["blaster"].normalizedValue);
+            
+            Player.ReloadGearValue("blaster");
         }
         else if (gearName == "jetpack")
         {
-            if (Player.PlayerData.JetpackLevel == 4)
+            if (Jetpack.BurnFuelCoroutine is not null || Jetpack.RechargeFuelCoroutine is not null ||
+                Player.PlayerData.JetpackLevel == 4)
             {
                 AudioManagement.PlayOneShot("ErrorSound");
                 return;
@@ -433,10 +488,13 @@ public class UpgradesMenu : MonoBehaviour
             Player.PlayerData.JetpackLevel += 1;
             Sliders["jetpack"].value += 1;
             SlidersImages["jetpack"].color = GearLevelGradient.Evaluate(Sliders["jetpack"].normalizedValue);
+            
+            Player.ReloadGearValue("jetpack");
         }
         else if (gearName == "flamethrower")
         {
-            if (Player.PlayerData.FlamethrowerLevel == 4)
+            if (Flamethrower.FlameCoroutine is not null || Flamethrower.CoolingCoroutine is not null ||
+                Player.PlayerData.FlamethrowerLevel == 4)
             {
                 AudioManagement.PlayOneShot("ErrorSound");
                 return;
@@ -445,6 +503,8 @@ public class UpgradesMenu : MonoBehaviour
             Player.PlayerData.FlamethrowerLevel += 1;
             Sliders["flamethrower"].value += 1;
             SlidersImages["flamethrower"].color = GearLevelGradient.Evaluate(Sliders["flamethrower"].normalizedValue);
+            
+            Player.ReloadGearValue("flamethrower");
         }
         else
         {
@@ -454,7 +514,6 @@ public class UpgradesMenu : MonoBehaviour
         
         Player.PlayerData.CoinCount -= 1;
         CoinCount.text = Player.PlayerData.CoinCount.ToString();
-        Player.ReloadGearValues();
         RefreshLoadedPlayerData();
         AudioManagement.PlayOneShot("UpgradeButtonSound");
     }

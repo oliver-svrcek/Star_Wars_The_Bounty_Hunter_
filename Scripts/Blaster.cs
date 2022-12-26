@@ -7,9 +7,9 @@ public class Blaster : MonoBehaviour
     private AudioManagement AudioManagement { get; set; }  = null;
     private BarManagement BlasterHeatBar { get; set; } = null;
     private GameObject BulletPrefab { get; set; } = null;
-    private Coroutine ShootCoroutine { get; set; } = null;
-    private Coroutine CoolingCoroutine { get; set; } = null;
-    private Coroutine OverheatCoroutine { get; set; } = null;
+    public Coroutine ShootCoroutine { get; private set; } = null;
+    public Coroutine CoolingCoroutine { get; private set; } = null;
+    public Coroutine OverheatCoroutine { get; private set; } = null;
     public int MaximumBlasterHeat { get; set; } = 10000;
     private int CurrentBlasterHeat { get; set; } = 0;
     public int BlasterHeatPerShot { get; set; } = 2000;

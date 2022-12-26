@@ -88,7 +88,6 @@ public class LevelEnd : MonoBehaviour
         {
             MusicAudioManagement.Stop();
             MusicAudioManagement.Play("LevelEndMusic", false);
-            Player.ReloadGearValues();
             Player.PlayerData.SceneBuildIndex += 1;
             Player.PlayerData.PositionAxisX = 0;
             Player.PlayerData.PositionAxisY = 0;

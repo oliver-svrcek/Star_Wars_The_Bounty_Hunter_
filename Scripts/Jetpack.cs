@@ -10,8 +10,8 @@ public class Jetpack : MonoBehaviour
     private AudioManagement AudioManagement { get; set; } = null;
     private BarManagement JetpackFuelBar { get; set; } = null;
     private bool Fly { get; set; } = false;
-    private Coroutine BurnFuelCoroutine { get; set; } = null;
-    private Coroutine RechargeFuelCoroutine { get; set; } = null;
+    public Coroutine BurnFuelCoroutine { get; private set; } = null;
+    public Coroutine RechargeFuelCoroutine { get; private set; } = null;
     private int MaximumJetpackFuel { get; set; } = 10000;
     private int CurrentJetpackFuel { get; set; } = 0;
     public int JetpackFuelConsumptionInitialPoints { get; set; } = 800;
